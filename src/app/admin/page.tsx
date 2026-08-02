@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import ImageUpload from "@/components/ImageUpload";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/auth";
 
@@ -801,16 +802,21 @@ export default function AdminPage() {
                         </div>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Зургийн URL-ууд (комаар тусгаарла)
-                        </label>
-                        <input
-                          type="text"
-                          value={productForm.images}
-                          onChange={(e) => setProductForm({ ...productForm, images: e.target.value })}
-                          placeholder="/images/product1.jpg, /images/product2.jpg"
-                          className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-purple-500"
+                       <ImageUpload
+                          label="Бүтээгдэхүүний зураг"
+                          value={productForm.images.split(",")[0]?.trim() || ""}
+                          onChange={(url) => {
+                            const existing = productForm.images
+                              .split(",")
+                              .map((s) => s.trim())
+                              .filter(Boolean);
+                            setProductForm({
+                              ...productForm,
+                              images: [url, ...existing].join(", "),
+                            });
+                          }}
                         />
+
                       </div>
                       <label className="flex items-center gap-2">
                         <input
