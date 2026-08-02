@@ -77,8 +77,5 @@ export default function ImageUpload({
     </div>
   );
 }
-Илгээлээ
-Compose
--д бичих
 
 
