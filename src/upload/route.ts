@@ -48,8 +48,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-Илгээлээ
-Compose
--д бичих
-
-
