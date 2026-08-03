@@ -227,7 +227,7 @@ export default function AdminPage() {
         }),
       });
 
-      if (res.ok) {
+     if (res.ok) {
         setShowProductForm(false);
         setEditingProduct(null);
         setProductForm({
@@ -240,8 +240,13 @@ export default function AdminPage() {
           featured: false,
         });
         fetchData();
+      } else {
+        const errText = await res.text();
+        alert("Алдаа гарлаа: " + errText);
       }
-    } catch {}
+    } catch (err) {
+      alert("Алдаа гарлаа: " + String(err));
+    }
   };
 
   const handleDeleteProduct = async (id: number) => {
