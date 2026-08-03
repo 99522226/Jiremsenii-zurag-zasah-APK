@@ -1075,7 +1075,7 @@ export default function AdminPage() {
                         <div className="flex gap-2 mt-2 overflow-x-auto">
                           {[
                             "Баярлалаа!",
-                            "95009809 руу залгана уу.",
+                            "85828385 руу залгана уу.",
                             "Захиалга өгнө үү: /products",
                           ].map((quick, idx) => (
                             <button
