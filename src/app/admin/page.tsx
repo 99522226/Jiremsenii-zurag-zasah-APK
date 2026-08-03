@@ -211,6 +211,7 @@ export default function AdminPage() {
 
   const handleProductSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    alert("Товч дарагдлаа!");
     try {
       const endpoint = editingProduct
         ? `/api/admin/products/${editingProduct.id}`
