@@ -917,6 +917,15 @@ export default function AdminPage() {
                           <option value="paid">Төлсөн</option>
                           <option value="refunded">Буцаагдсан</option>
                         </select>
+                        <div className="mt-4">
+  <ImageUpload
+    label="Зассан зураг"
+    value={order.editedPhoto || ""}
+    onChange={(url) =>
+      handleUpdateOrder(order.id, { editedPhoto: url })
+    }
+  />
+</div>
                       </div>
                     </div>
                   </div>
