@@ -917,6 +917,7 @@ export default function AdminPage() {
                           <option value="paid">Төлсөн</option>
                           <option value="refunded">Буцаагдсан</option>
                         </select>
+                      </div>
                         <div className="mt-4">
   <ImageUpload
     label="Зассан зураг"
@@ -926,7 +927,6 @@ export default function AdminPage() {
     }
   />
 </div>
-                      </div>
                     </div>
                   </div>
                 ))
