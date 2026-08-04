@@ -48,14 +48,31 @@ export default function CheckoutPage() {
     }
   }, [user]);
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+ const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      setUploadedPhoto(reader.result as string);
-    };
-    reader.readAsDataURL(file);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert("Зураг upload хийхэд алдаа гарлаа");
+        return;
+      }
+
+      setUploadedPhoto(data.url);
+    } catch (err) {
+      console.error(err);
+      alert("Зураг upload хийхэд алдаа гарлаа");
+    }
   };
 
   const handleSubmit = async () => {
