@@ -878,7 +878,10 @@ export default function AdminPage() {
                 </div>
               ) : (
                 orders.map((order) => (
-                  <div key={order.id} className="bg-white rounded-2xl p-6 shadow-sm">
+                  <div key={order.id} className="bg-white rounded-2xl p-6 shadow-sm"> 
+                    <pre className="text-xs bg-gray-100 p-2 rounded overflow-auto">
+  {JSON.stringify(order, null, 2)}
+</pre>
                     <div className="flex items-start justify-between mb-4">
                       <div>
                         <h3 className="font-bold text-gray-900">Захиалга #{order.id}</h3>
