@@ -844,12 +844,14 @@ export default function AdminPage() {
                         >
                           Цуцлах
                         </button>
-                        <button
+                     <button
                           type="submit"
+                          onClick={() => alert("Товч дээр дарлаа!")}
                           className="flex-1 py-3 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-colors"
                         >
                           {editingProduct ? "Хадгалах" : "Үүсгэх"}
                         </button>
+
                       </div>
                     </form>
                   </div>
