@@ -75,7 +75,7 @@ export default function CheckoutPage() {
     }
   };
 
-  const handleSubmit = async () => {
+const handleSubmit = async () => {
     setSubmitting(true);
     try {
       const res = await fetch("/api/orders", {
@@ -98,17 +98,38 @@ export default function CheckoutPage() {
         setOrderId(order.id);
         setOrderComplete(true);
         clearCart();
+
+        if (uploadedPhoto && prompt) {
+          fetch("/api/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              imageUrl: uploadedPhoto,
+              prompt: prompt,
+            }),
+          })
+            .then((r) => r.json())
+            .then((data) => {
+              if (data.url) {
+                fetch(`/api/orders/${order.id}`, {
+                  method: "PATCH",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ editedPhoto: data.url }),
+                });
+              }
+            })
+            .catch((err) => console.error("AI generate error:", err));
+        }
       }
     } catch {}
     setSubmitting(false);
   };
-
   // Get settings values with defaults
-  const phone = settings.phone?.value || "95009809";
+  const phone = settings.phone?.value || "85525385";
   const email = settings.email?.value || "jaagiierdene96@gmail.com";
   const bankName = settings.bank_name?.value || "Хаан банк";
   const bankAccount = settings.bank_account?.value || "5000XXXXXXXX";
-  const accountHolder = settings.account_holder?.value || "Жаргал Эрдэнэ";
+  const accountHolder = settings.account_holder?.value || "Эрдэнэ Түвшинжаргал ";
   const deliveryTime = settings.delivery_time?.value || "24";
 
   if (!mounted) return null;
