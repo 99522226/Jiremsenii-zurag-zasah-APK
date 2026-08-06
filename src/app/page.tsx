@@ -141,7 +141,7 @@ export default function HomePage() {
   ref={containerRef}
   onMouseMove={handleMove}
   className="relative max-w-4xl mx-auto overflow-hidden rounded-3xl shadow-xl cursor-ew-resize"
-
+  >   
       {/* After зураг */}
       <img
         src="/sample-after.jpg"
