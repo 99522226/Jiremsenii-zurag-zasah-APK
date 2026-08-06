@@ -141,7 +141,7 @@ export default function HomePage() {
 
       {/* After зураг */}
       <img
-        src="/images/sample-after.jpg"
+        src="/sample-after.jpg"
         alt="Дараа"
         className="w-full h-96 object-cover"
       />
@@ -153,7 +153,7 @@ export default function HomePage() {
         style={{ width: "50%" }}
       >
         <img
-          src="/images/sample-before.jpg"
+          src="/sample-before.jpg"
           alt="Өмнө"
           className="h-96 w-full object-cover"
           style={{ maxWidth: "none" }}
