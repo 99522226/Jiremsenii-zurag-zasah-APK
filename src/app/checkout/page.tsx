@@ -18,6 +18,7 @@ export default function CheckoutPage() {
   const [orderComplete, setOrderComplete] = useState(false);
   const [orderId, setOrderId] = useState<number | null>(null);
   const [uploadedPhoto, setUploadedPhoto] = useState<string>("");
+  const [prompt, setPrompt] = useState<string>("");
   const [settings, setSettings] = useState<Settings>({});
 
   const [form, setForm] = useState({
