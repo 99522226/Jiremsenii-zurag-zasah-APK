@@ -115,46 +115,74 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Before/After Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="text-rose-600 font-semibold text-sm tracking-wider uppercase">Жишээ</span>
-            <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-3"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              Өмнө ба Дараа
-            </h2>
-            <p className="text-gray-500 mt-4 max-w-2xl mx-auto text-lg">
-              AI технологи ашиглан таны зургийг жирэмсэн үеийн гоё зураг болгон хувиргана
-            </p>
-          </div>
+     {/* Before/After Slider */}
+<section className="py-20 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="group relative overflow-hidden rounded-3xl shadow-xl">
-              <img
-                src="/images/sample-before.jpg"
-                alt="Өмнө"
-                className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute bottom-4 left-4 px-4 py-2 bg-gray-900/80 backdrop-blur-sm rounded-full text-white font-semibold text-sm">
-                📸 Өмнө
-              </div>
-            </div>
-            <div className="group relative overflow-hidden rounded-3xl shadow-xl">
-              <img
-                src="/images/sample-after.jpg"
-                alt="Дараа"
-                className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute bottom-4 left-4 px-4 py-2 bg-rose-600/90 backdrop-blur-sm rounded-full text-white font-semibold text-sm">
-                ✨ Дараа
-              </div>
-            </div>
-          </div>
+    <div className="text-center mb-16">
+      <span className="text-rose-600 font-semibold text-sm tracking-wider uppercase">
+        Жишээ
+      </span>
+
+      <h2
+        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-3"
+        style={{ fontFamily: "'Playfair Display', serif" }}
+      >
+        Өмнө ба Дараа
+      </h2>
+
+      <p className="text-gray-500 mt-4 max-w-2xl mx-auto text-lg">
+        AI технологи ашиглан таны зургийг жирэмсний үеийн гоё зураг болгон хувиргана
+      </p>
+    </div>
+
+
+    <div className="relative max-w-4xl mx-auto overflow-hidden rounded-3xl shadow-xl">
+
+      {/* After зураг */}
+      <img
+        src="/images/sample-after.jpg"
+        alt="Дараа"
+        className="w-full h-96 object-cover"
+      />
+
+
+      {/* Before зураг */}
+      <div
+        className="absolute top-0 left-0 h-full overflow-hidden"
+        style={{ width: "50%" }}
+      >
+        <img
+          src="/images/sample-before.jpg"
+          alt="Өмнө"
+          className="h-96 w-full object-cover"
+          style={{ maxWidth: "none" }}
+        />
+      </div>
+
+
+      {/* Slider line */}
+      <div
+        className="absolute top-0 bottom-0 left-1/2 w-1 bg-white shadow-lg"
+      >
+        <div className="absolute top-1/2 -translate-y-1/2 -left-5 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg">
+          ↔
         </div>
-      </section>
+      </div>
+
+
+      <div className="absolute bottom-5 left-5 bg-gray-900/80 text-white px-4 py-2 rounded-full">
+        📸 Өмнө
+      </div>
+
+      <div className="absolute bottom-5 right-5 bg-rose-600/90 text-white px-4 py-2 rounded-full">
+        ✨ Дараа
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
       {/* How it works */}
       <section className="py-20 bg-white">
