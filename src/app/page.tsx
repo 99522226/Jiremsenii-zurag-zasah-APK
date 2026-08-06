@@ -137,7 +137,10 @@ export default function HomePage() {
     </div>
 
 
-    <div className="relative max-w-4xl mx-auto overflow-hidden rounded-3xl shadow-xl">
+   <div
+  ref={containerRef}
+  onMouseMove={handleMove}
+  className="relative max-w-4xl mx-auto overflow-hidden rounded-3xl shadow-xl cursor-ew-resize"
 
       {/* After зураг */}
       <img
@@ -150,7 +153,7 @@ export default function HomePage() {
       {/* Before зураг */}
       <div
         className="absolute top-0 left-0 h-full overflow-hidden"
-        style={{ width: "50%" }}
+        style={{ width: `${slider}%" }}
       >
         <img
           src="/sample-before.jpg"
