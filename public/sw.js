@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jiremsen-zurag-v2';
+const CACHE_NAME = 'jiremsen-zurag-v3';
 const urlsToCache = [
   '/',
   '/products',
