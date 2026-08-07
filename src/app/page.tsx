@@ -180,7 +180,7 @@ const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
       {/* Slider line */}
     <div
   className="absolute top-0 bottom-0 w-1 bg-white shadow-lg"
-  style={{ left: ${slider}% }}
+  style={{ left: `${slider}%` }}
       >
         <div className="absolute top-1/2 -translate-y-1/2 -left-5 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg">
           ↔
