@@ -568,7 +568,7 @@ export default function AdminPage() {
                     </label>
                     <input
                       type="text"
-                      value={settings.phone?.value || "95009809"}
+                      value={settings.phone?.value || "85525385"}
                       onChange={(e) => handleSettingChange("phone", e.target.value)}
                       className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-purple-500"
                     />
