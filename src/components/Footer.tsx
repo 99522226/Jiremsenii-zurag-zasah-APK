@@ -42,7 +42,7 @@ export default function Footer() {
             <ul className="space-y-3 text-gray-400">
               <li className="flex items-center gap-2">
                 <span>📞</span>
-                <a href="tel:95009809" className="hover:text-rose-400 transition-colors">95009809</a>
+                <a href="tel:85525385" className="hover:text-rose-400 transition-colors">85525385</a>
               </li>
               <li className="flex items-center gap-2">
                 <span>📧</span>
