@@ -118,7 +118,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                 <img
                   src={product.images[selectedImage] || "/images/product1.jpg"}
                   alt={product.name}
-                  className="w-full h-[400px] sm:h-[500px] object-cover"
+                 className="w-full h-[400px] sm:h-[500px] object-contain bg-gray-50"
                 />
               </div>
               {product.images.length > 1 && (
@@ -133,7 +133,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                           : "opacity-60 hover:opacity-100"
                       }`}
                     >
-                      <img src={img} alt="" className="w-full h-full object-cover" />
+                     <img src={img} alt="" className="w-full h-full object-contain bg-gray-50" />
                     </button>
                   ))}
                 </div>
