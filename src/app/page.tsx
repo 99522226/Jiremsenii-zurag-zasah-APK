@@ -70,7 +70,7 @@ const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
 
   const price = settings?.photo_price?.value || "5000";
   const deliveryTime = settings?.delivery_time?.value || "24";
-  const phone = settings?.phone?.value || "95009809";
+  const phone = settings?.phone?.value || "85525385";
 
   return (
     <StoreLayout>
