@@ -44,6 +44,16 @@ const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
 
   setSlider(percent);
 };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+  if (!containerRef.current) return;
+
+  const rect = containerRef.current.getBoundingClientRect();
+  const x = e.touches[0].clientX - rect.left;
+  const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+
+  setSlider(percent);
+};
   
   useEffect(() => {
     Promise.all([
