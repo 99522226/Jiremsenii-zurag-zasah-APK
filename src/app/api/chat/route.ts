@@ -23,7 +23,7 @@ const BOT_RESPONSES: { keywords: string[]; response: string }[] = [
   },
   {
     keywords: ["холбоо", "contact", "утас", "phone", "email", "имэйл"],
-    response: "📞 **Холбоо барих:**\n\n📱 Утас: 95009809\n📧 Email: jaagiierdene96@gmail.com\n📍 Байршил: Дорноговь, Сайншанд\n\n🕐 Ажлын цаг: Даваа-Баасан 09:00-18:00",
+    response: "📞 **Холбоо барих:**\n\n📱 Утас: 85525385\n📧 Email: jaagiierdene96@gmail.com\n📍 Байршил: Дорноговь, Сайншанд\n\n🕐 Ажлын цаг: Даваа-Баасан 09:00-18:00",
   },
   {
     keywords: ["хугацаа", "хэдэн", "delivery", "time", "өдөр"],
@@ -31,7 +31,7 @@ const BOT_RESPONSES: { keywords: string[]; response: string }[] = [
   },
   {
     keywords: ["төлбөр", "payment", "банк", "qpay", "данс"],
-    response: "💳 **Төлбөрийн сонголт:**\n\n🏦 Банкны шилжүүлэг\n📱 QPay\n💰 SocialPay\n💵 Бэлнээр\n\n🏦 Хаан банк: 5000XXXXXXXX\n👤 Жаргал Эрдэнэ",
+    response: "💳 **Төлбөрийн сонголт:**\n\n🏦 Банкны шилжүүлэг\n📱 QPay\n💰 SocialPay\n💵 Бэлнээр\n\n🏦 Хаан банк: 5064788284\n👤 Эрдэнэ Түвшинжаргал",
   },
   {
     keywords: ["баярлалаа", "thank", "thanks", "рахмат"],
