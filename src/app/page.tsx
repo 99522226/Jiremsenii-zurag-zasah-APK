@@ -153,7 +153,7 @@ export default function HomePage() {
       {/* Before зураг */}
       <div
         className="absolute top-0 left-0 h-full overflow-hidden"
-        style={{ width: `${slider}%" }}
+        style={{ width: `${slider}%` }}
       >
         <img
           src="/sample-before.jpg"
