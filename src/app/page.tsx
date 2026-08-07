@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import StoreLayout from "@/components/StoreLayout";
 import { useCartStore } from "@/store/cart";
@@ -31,7 +31,20 @@ export default function HomePage() {
   const [settings, setSettings] = useState<Settings | null>(null);
   const [loading, setLoading] = useState(true);
   const addItem = useCartStore((s) => s.addItem);
+  
+const [slider, setSlider] = useState(50);
+const containerRef = useRef<HTMLDivElement>(null);
 
+const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  if (!containerRef.current) return;
+
+  const rect = containerRef.current.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+
+  setSlider(percent);
+};
+  
   useEffect(() => {
     Promise.all([
       fetch("/api/products?featured=true").then((r) => r.json()),
@@ -165,8 +178,9 @@ export default function HomePage() {
 
 
       {/* Slider line */}
-      <div
-        className="absolute top-0 bottom-0 left-1/2 w-1 bg-white shadow-lg"
+    <div
+  className="absolute top-0 bottom-0 w-1 bg-white shadow-lg"
+  style={{ left: ${slider}% }}
       >
         <div className="absolute top-1/2 -translate-y-1/2 -left-5 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg">
           ↔
