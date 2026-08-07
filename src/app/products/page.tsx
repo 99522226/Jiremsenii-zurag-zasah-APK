@@ -129,7 +129,7 @@ export default function ProductsPage() {
                     <img
                       src={product.images[0] || "/images/product1.jpg"}
                       alt={product.name}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                     className="w-full h-64 object-contain bg-gray-50 group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute top-3 left-3 px-3 py-1 bg-rose-600 text-white rounded-full text-xs font-bold">
                       {product.price.toLocaleString()}₮
