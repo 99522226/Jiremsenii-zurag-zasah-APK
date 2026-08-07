@@ -334,7 +334,7 @@ const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
                     <img
                       src={product.images[0] || "/images/product1.jpg"}
                       alt={product.name}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-64 object-contain bg-gray-50 group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute top-3 right-3 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-rose-600">
                       {product.category}
