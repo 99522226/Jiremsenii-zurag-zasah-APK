@@ -78,7 +78,7 @@ const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/images/hero-bg.jpg"
+            src="/sample-after.jpg"
             alt="Hero"
             className="w-full h-full object-cover"
           />
