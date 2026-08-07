@@ -163,6 +163,7 @@ const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
    <div
   ref={containerRef}
   onMouseMove={handleMove}
+     onTouchMove={handleTouchMove}
   className="relative max-w-4xl mx-auto overflow-hidden rounded-3xl shadow-xl cursor-ew-resize"
   >   
       {/* After зураг */}
