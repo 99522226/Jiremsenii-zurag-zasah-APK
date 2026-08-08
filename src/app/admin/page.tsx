@@ -879,7 +879,20 @@ export default function AdminPage() {
               ) : (
                 orders.map((order) => (
                   <div key={order.id} className="bg-white rounded-2xl p-6 shadow-sm"> 
-                   
+
+                    {order.uploadedPhoto && (
+  <div className="mt-4">
+    <p className="text-sm font-semibold text-gray-700 mb-2">
+      Хэрэглэгчийн оруулсан зураг
+    </p>
+
+    <img
+      src={order.uploadedPhoto}
+      alt="Хэрэглэгчийн оруулсан зураг"
+      className="w-full max-w-md rounded-xl border object-cover"
+    />
+  </div>
+)}
                     <div className="flex items-start justify-between mb-4">
                       <div>
                         <h3 className="font-bold text-gray-900">Захиалга #{order.id}</h3>
