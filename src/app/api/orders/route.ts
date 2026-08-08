@@ -3,7 +3,7 @@ import { db } from "@/db";
 import { orders } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 
-export async function POST(req: NextRequest) {
+export async function DELETE(req: NextRequest) {
   try {
     const body = await req.json();
     const { customerName, customerEmail, customerPhone, items, totalAmount, paymentMethod, uploadedPhoto, notes } = body;
