@@ -937,6 +937,43 @@ export default function AdminPage() {
       handleUpdateOrder(order.id, { editedPhoto: url })
     }
   />
+    <div className="mt-4">
+  <ImageUpload
+    label="Зассан зураг"
+    value={order.editedPhoto || ""}
+    onChange={(url) =>
+      handleUpdateOrder(order.id, { editedPhoto: url })
+    }
+  />
+
+  {order.status === "completed" && (
+    <button
+      type="button"
+      onClick={async () => {
+        if (!confirm("Энэ дууссан захиалгыг устгах уу?")) return;
+
+        try {
+          const res = await fetch(`/api/orders?id=${order.id}`, {
+            method: "DELETE",
+          });
+
+          if (!res.ok) {
+            alert("Захиалга устгахад алдаа гарлаа");
+            return;
+          }
+
+          setOrders((prev) => prev.filter((o) => o.id !== order.id));
+        } catch (error) {
+          console.error(error);
+          alert("Захиалга устгахад алдаа гарлаа");
+        }
+      }}
+      className="mt-4 px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600"
+    >
+      🗑️ Устгах
+    </button>
+  )}
+</div>                      
 </div>
                     </div>
                   </div>
