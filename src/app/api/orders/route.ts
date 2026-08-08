@@ -61,3 +61,38 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Серверийн алдаа" }, { status: 500 });
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const url = new URL(req.url);
+    const id = url.searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Захиалгын ID олдсонгүй" },
+        { status: 400 }
+      );
+    }
+
+    const [deletedOrder] = await db
+      .delete(orders)
+      .where(eq(orders.id, Number(id)))
+      .returning();
+
+    if (!deletedOrder) {
+      return NextResponse.json(
+        { error: "Захиалга олдсонгүй" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Delete order error:", error);
+
+    return NextResponse.json(
+      { error: "Захиалга устгахад алдаа гарлаа" },
+      { status: 500 }
+    );
+  }
+}
