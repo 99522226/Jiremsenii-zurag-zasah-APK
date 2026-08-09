@@ -31,27 +31,57 @@ export async function GET(req: NextRequest) {
     const allSettings = await db.select().from(settings);
     
     // Merge with defaults
-    const defaults: Record<string, { value: string; label: string }> = {
-      photo_price: { value: "5000", label: "Нэг зургийн үнэ (₮)" },
-      delivery_time: { value: "24", label: "Хүргэлтийн хугацаа (цаг)" },
-      phone: { value: "85525385", label: "Утасны дугаар" },
-      email: { value: "jaagiierdene96@gmail.com", label: "Имэйл хаяг" },
-      location: { value: "Дорноговь, Сайншанд", label: "Байршил" },
-      bank_account: { value: "5000XXXXXXXX", label: "Дансны дугаар" },
-      bank_name: { value: "Хаан банк", label: "Банкны нэр" },
-      account_holder: { value: "Эрдэнэ Түвшинжаргал", label: "Данс эзэмшигч" },
-    };
-    
-    before_image: {
-  value: "/sample-before.jpg",
-  label: "Өмнөх зураг",
-},
+   const defaults: Record<string, { value: string; label: string }> = {
+  photo_price: {
+    value: "5000",
+    label: "Нэг зургийн үнэ (₮)",
+  },
 
-after_image: {
-  value: "/sample-after.jpg",
-  label: "Дараах зураг",
-},
-  };    
+  delivery_time: {
+    value: "24",
+    label: "Хүргэлтийн хугацаа (цаг)",
+  },
+
+  phone: {
+    value: "95009809",
+    label: "Утасны дугаар",
+  },
+
+  email: {
+    value: "jaagiierdene96@gmail.com",
+    label: "Имэйл хаяг",
+  },
+
+  location: {
+    value: "Дорноговь, Сайншанд",
+    label: "Байршил",
+  },
+
+  bank_account: {
+    value: "5000XXXXXXXX",
+    label: "Дансны дугаар",
+  },
+
+  bank_name: {
+    value: "Хаан банк",
+    label: "Банкны нэр",
+  },
+
+  account_holder: {
+    value: "Жаргал Эрдэнэ",
+    label: "Данс эзэмшигч",
+  },
+
+  before_image: {
+    value: "/sample-before.jpg",
+    label: "Өмнөх зураг",
+  },
+
+  after_image: {
+    value: "/sample-after.jpg",
+    label: "Дараах зураг",
+  },
+};
 
     const settingsMap: Record<string, { value: string; label: string }> = {};
     
