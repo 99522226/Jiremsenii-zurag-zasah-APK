@@ -27,6 +27,29 @@ interface Settings {
 }
 
 export default function HomePage() {
+  const [beforeImage, setBeforeImage] = useState("/sample-before.jpg");
+const [afterImage, setAfterImage] = useState("/sample-after.jpg");
+
+useEffect(() => {
+  const fetchSettings = async () => {
+    try {
+      const res = await fetch("/api/settings");
+      const data = await res.json();
+
+      if (data.before_image?.value) {
+        setBeforeImage(data.before_image.value);
+      }
+
+      if (data.after_image?.value) {
+        setAfterImage(data.after_image.value);
+      }
+    } catch (error) {
+      console.error("Settings load error:", error);
+    }
+  };
+
+  fetchSettings();
+}, []);
   const [products, setProducts] = useState<Product[]>([]);
   const [settings, setSettings] = useState<Settings | null>(null);
   const [loading, setLoading] = useState(true);
