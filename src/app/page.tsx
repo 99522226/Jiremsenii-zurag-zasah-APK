@@ -27,29 +27,9 @@ interface Settings {
 }
 
 export default function HomePage() {
-  const [beforeImage, setBeforeImage] = useState("/sample-before.jpg");
+ const [beforeImage, setBeforeImage] = useState("/sample-before.jpg");
 const [afterImage, setAfterImage] = useState("/sample-after.jpg");
-
-useEffect(() => {
-  const fetchSettings = async () => {
-    try {
-      const res = await fetch("/api/settings");
-      const data = await res.json();
-
-      if (data.before_image?.value) {
-        setBeforeImage(data.before_image.value);
-      }
-
-      if (data.after_image?.value) {
-        setAfterImage(data.after_image.value);
-      }
-    } catch (error) {
-      console.error("Settings load error:", error);
-    }
-  };
-
-  fetchSettings();
-}, []);
+  
   const [products, setProducts] = useState<Product[]>([]);
   const [settings, setSettings] = useState<Settings | null>(null);
   const [loading, setLoading] = useState(true);
@@ -78,19 +58,27 @@ const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
   setSlider(percent);
 };
   
-  useEffect(() => {
-    Promise.all([
-      fetch("/api/products?featured=true").then((r) => r.json()),
-      fetch("/api/settings").then((r) => r.json()),
-    ])
-      .then(([productsData, settingsData]) => {
-        setProducts(productsData);
-        setSettings(settingsData);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
+ useEffect(() => {
+  Promise.all([
+    fetch("/api/products?featured=true").then((r) => r.json()),
+    fetch("/api/settings").then((r) => r.json()),
+  ])
+    .then(([productsData, settingsData]) => {
+      setProducts(productsData);
+      setSettings(settingsData);
 
+      if (settingsData.before_image?.value) {
+        setBeforeImage(settingsData.before_image.value);
+      }
+
+      if (settingsData.after_image?.value) {
+        setAfterImage(settingsData.after_image.value);
+      }
+
+      setLoading(false);
+    })
+    .catch(() => setLoading(false));
+}, []);
   const price = settings?.photo_price?.value || "5000";
   const deliveryTime = settings?.delivery_time?.value || "24";
   const phone = settings?.phone?.value || "85525385";
