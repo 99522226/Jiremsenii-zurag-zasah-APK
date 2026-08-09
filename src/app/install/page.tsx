@@ -13,37 +13,70 @@ export default function InstallPage() {
   const [isInstalled, setIsInstalled] = useState(false);
   const [canInstall, setCanInstall] = useState(false);
 
-  useEffect(() => {
-    // Check if already installed
-    if (window.matchMedia("(display-mode: standalone)").matches) {
+ useEffect(() => {
+  // Check if already installed
+  const checkInstalled = () => {
+    if (
+      window.matchMedia("(display-mode: standalone)").matches ||
+      (window.navigator as any).standalone === true
+    ) {
       setIsInstalled(true);
     }
+  };
 
-    const handler = (e: Event) => {
-      e.preventDefault();
-      setDeferredPrompt(e as BeforeInstallPromptEvent);
-      setCanInstall(true);
-    };
+  checkInstalled();
 
-    window.addEventListener("beforeinstallprompt", handler);
+  // Android / Chrome / Edge install prompt
+  const handler = (e: Event) => {
+    e.preventDefault();
 
-    // Register service worker
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js");
-    }
+    setDeferredPrompt(e as BeforeInstallPromptEvent);
+    setCanInstall(true);
+  };
 
-    return () => window.removeEventListener("beforeinstallprompt", handler);
-  }, []);
+  window.addEventListener("beforeinstallprompt", handler);
 
-  const handleInstall = async () => {
-    if (!deferredPrompt) return;
-    await deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === "accepted") {
-      setIsInstalled(true);
-    }
+  // App installed
+  const installedHandler = () => {
+    setIsInstalled(true);
+    setCanInstall(false);
     setDeferredPrompt(null);
   };
+
+  window.addEventListener("appinstalled", installedHandler);
+
+  // Register service worker
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js").catch((error) => {
+      console.error("Service Worker registration failed:", error);
+    });
+  }
+
+  return () => {
+    window.removeEventListener("beforeinstallprompt", handler);
+    window.removeEventListener("appinstalled", installedHandler);
+  };
+}, []);
+
+const handleInstall = async () => {
+  if (!deferredPrompt) {
+    alert(
+      "Таны браузер одоогоор шууд суулгах цонхыг дэмжихгүй байна. Chrome эсвэл Edge ашиглана уу."
+    );
+    return;
+  }
+
+  await deferredPrompt.prompt();
+
+  const { outcome } = await deferredPrompt.userChoice;
+
+  if (outcome === "accepted") {
+    setIsInstalled(true);
+    setCanInstall(false);
+  }
+
+  setDeferredPrompt(null);
+};
 
   return (
     <StoreLayout>
