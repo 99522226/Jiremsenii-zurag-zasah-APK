@@ -50,8 +50,10 @@ export default function ImageUpload({
   };
 
   return (
-    <div className="space-y-2">
-      <label className="block text-sm font-medium">{label}</label>
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        {label}
+      </label>
 
       {value && (
         <img
@@ -70,10 +72,16 @@ export default function ImageUpload({
       />
 
       {uploading && (
-        <p className="text-sm text-gray-500">Зураг upload хийж байна...</p>
+        <p className="text-sm text-gray-500">
+          Зураг upload хийж байна...
+        </p>
       )}
 
-      {error && <p className="text-sm text-red-500">{error}</p>}
+      {error && (
+        <p className="text-sm text-red-500">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
