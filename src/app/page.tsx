@@ -191,7 +191,7 @@ const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
   >   
       {/* After зураг */}
       <img
-        src="/sample-after.jpg"
+       src={afterImage}
         alt="Дараа"
         className="w-full h-80 object-cover"
       />
@@ -203,7 +203,7 @@ const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
         style={{ width: `${slider}%` }}
       >
         <img
-          src="/sample-before.jpg"
+         src={beforeImage}
           alt="Өмнө"
           className="h-96 w-full object-cover"
           style={{ maxWidth: "none" }}
