@@ -741,8 +741,8 @@ export default function AdminPage() {
 
               {/* Product Form Modal */}
               {showProductForm && (
-               <div className="fixed inset-0 z-[200] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-                  <div className="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+             <div className="fixed inset-0 z-[200] bg-black/50 backdrop-blur-sm overflow-y-auto p-4">
+  <div className="bg-white rounded-2xl w-full max-w-4xl mx-auto my-4 max-h-[calc(100vh-2rem)] overflow-y-auto">
                     <div className="p-6 border-b">
                       <h2 className="text-xl font-bold text-gray-900">
                         {editingProduct ? "Бүтээгдэхүүн засах" : "Шинэ бүтээгдэхүүн"}
