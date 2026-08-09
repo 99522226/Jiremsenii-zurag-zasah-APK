@@ -67,6 +67,7 @@ const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
       setProducts(productsData);
       setSettings(settingsData);
 
+      
       if (settingsData.before_image?.value) {
         setBeforeImage(settingsData.before_image.value);
       }
