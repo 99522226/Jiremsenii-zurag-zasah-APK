@@ -51,6 +51,7 @@ after_image: {
   value: "/sample-after.jpg",
   label: "Дараах зураг",
 },
+  };    
 
     const settingsMap: Record<string, { value: string; label: string }> = {};
     
