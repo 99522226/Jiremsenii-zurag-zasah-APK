@@ -555,6 +555,111 @@ export default function AdminPage() {
                   </div>
                 </div>
               </div>
+              {/* Price Settings */}
+<div className="bg-white rounded-2xl p-6 shadow-sm">
+  <h3 className="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+    <span>💰</span> Үнийн тохиргоо
+  </h3>
+
+  <div className="grid sm:grid-cols-2 gap-6">
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Нэг зургийн үнэ (₮)
+      </label>
+
+      <div className="relative">
+        <input
+          type="number"
+          value={settings.photo_price?.value || "5000"}
+          onChange={(e) =>
+            handleSettingChange("photo_price", e.target.value)
+          }
+          className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-purple-500 text-2xl font-bold text-rose-600"
+        />
+
+        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg">
+          ₮
+        </span>
+      </div>
+
+      <p className="text-xs text-gray-500 mt-2">
+        Нүүр хуудас болон бүх хуудсанд харагдана
+      </p>
+    </div>
+
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Хүргэлтийн хугацаа (цаг)
+      </label>
+
+      <input
+        type="number"
+        value={settings.delivery_time?.value || "24"}
+        onChange={(e) =>
+          handleSettingChange("delivery_time", e.target.value)
+        }
+        className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-purple-500"
+      />
+    </div>
+  </div>
+</div>
+
+{/* Before / After Image Settings */}
+<div className="bg-white rounded-2xl p-6 shadow-sm mt-6">
+  <h3 className="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+    <span>🖼️</span> Өмнөх ба дараах зураг
+  </h3>
+
+  <div className="grid sm:grid-cols-2 gap-6">
+
+    {/* Өмнөх зураг */}
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Өмнөх зураг
+      </label>
+
+      <ImageUpload
+        label="Өмнөх зураг upload хийх"
+        value={settings.before_image?.value || ""}
+        onChange={(url) =>
+          handleSettingChange("before_image", url)
+        }
+      />
+
+      {settings.before_image?.value && (
+        <img
+          src={settings.before_image.value}
+          alt="Өмнөх зураг"
+          className="mt-3 w-full h-48 object-cover rounded-xl"
+        />
+      )}
+    </div>
+
+    {/* Дараах зураг */}
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Дараах зураг
+      </label>
+
+      <ImageUpload
+        label="Дараах зураг upload хийх"
+        value={settings.after_image?.value || ""}
+        onChange={(url) =>
+          handleSettingChange("after_image", url)
+        }
+      />
+
+      {settings.after_image?.value && (
+        <img
+          src={settings.after_image.value}
+          alt="Дараах зураг"
+          className="mt-3 w-full h-48 object-cover rounded-xl"
+        />
+      )}
+    </div>
+
+  </div>
+</div>
 
               {/* Contact Settings */}
               <div className="bg-white rounded-2xl p-6 shadow-sm">
