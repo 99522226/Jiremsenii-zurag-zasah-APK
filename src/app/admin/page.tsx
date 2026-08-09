@@ -741,14 +741,14 @@ export default function AdminPage() {
 
               {/* Product Form Modal */}
               {showProductForm && (
-                <div className="fixed inset-0 z-[200] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+               <div className="fixed inset-0 z-[200] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
                   <div className="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
                     <div className="p-6 border-b">
                       <h2 className="text-xl font-bold text-gray-900">
                         {editingProduct ? "Бүтээгдэхүүн засах" : "Шинэ бүтээгдэхүүн"}
                       </h2>
                     </div>
-                    <form onSubmit={handleProductSubmit} className="p-6 space-y-4">
+                    <form onSubmit={handleProductSubmit} className="p-6 space-y-4 overflow-x-hidden">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Нэр</label>
                         <input
