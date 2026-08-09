@@ -41,6 +41,7 @@ export async function GET(req: NextRequest) {
       bank_name: { value: "Хаан банк", label: "Банкны нэр" },
       account_holder: { value: "Эрдэнэ Түвшинжаргал", label: "Данс эзэмшигч" },
     };
+    
     before_image: {
   value: "/sample-before.jpg",
   label: "Өмнөх зураг",
