@@ -61,7 +61,7 @@ export default function InstallPage() {
 const handleInstall = async () => {
   if (!deferredPrompt) {
     alert(
-      "Таны браузер одоогоор шууд суулгах цонхыг дэмжихгүй байна. Chrome эсвэл Edge ашиглана уу."
+      "Суулгах цонх одоогоор бэлэн биш байна.\n\nChrome-ийн баруун дээд талын ⋮ цэсийг нээгээд “Install app” эсвэл “Add to Home screen” сонгоно уу."
     );
     return;
   }
@@ -114,21 +114,32 @@ const handleInstall = async () => {
           ) : (
             <div className="space-y-8">
               {/* Install Button */}
-              {canInstall && (
-                <div className="bg-gradient-to-br from-rose-600 to-pink-600 rounded-3xl p-8 text-white text-center shadow-xl">
-                  <span className="text-6xl block mb-4">📱</span>
-                  <h2 className="text-2xl font-bold mb-4">Апп суулгах</h2>
-                  <p className="text-white/80 mb-6">
-                    Доорх товчийг дарж аппыг утсандаа суулгана уу
-                  </p>
-                  <button
-                    onClick={handleInstall}
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-rose-600 rounded-full font-bold text-lg hover:bg-gray-50 transition-all shadow-lg"
-                  >
-                    ✨ Одоо суулгах
-                  </button>
-                </div>
-              )}
+             <div className="bg-gradient-to-br from-rose-600 to-pink-600 rounded-3xl p-8 text-white text-center shadow-xl">
+  <span className="text-6xl block mb-4">📱</span>
+
+  <h2 className="text-2xl font-bold mb-4">
+    Апп суулгах
+  </h2>
+
+  <p className="text-white/80 mb-6">
+    LMarina аппыг утсандаа суулгаад хурдан, хялбар ашиглаарай.
+  </p>
+
+  <button
+    onClick={handleInstall}
+    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-rose-600 rounded-full font-bold text-lg hover:bg-gray-50 transition-all shadow-lg"
+  >
+    ✨ Одоо суулгах
+  </button>
+
+  {!canInstall && (
+    <p className="text-white/70 text-sm mt-4">
+      Хэрэв суулгах цонх гарахгүй бол Chrome-ийн ⋮ цэснээс
+      <strong> “Install app”</strong> эсвэл
+      <strong> “Add to Home screen”</strong>-ийг сонгоно уу.
+    </p>
+  )}
+</div>
 
               {/* Manual Instructions */}
               <div className="bg-white rounded-3xl p-8 shadow-sm">
