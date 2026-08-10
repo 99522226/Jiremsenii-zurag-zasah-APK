@@ -259,18 +259,62 @@ export default function AdminPage() {
     } catch {}
   };
 
-  const handleUpdateOrder = async (orderId: number, updates: Record<string, string>) => {
-    try {
-      const res = await fetch(`/api/orders/${orderId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updates),
-      });
-      if (res.ok) {
-        fetchData();
+ const handleUpdateOrder = async (
+  orderId: number,
+  updates: Record<string, string>
+) => {
+  try {
+    const res = await fetch(`/api/orders/${orderId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updates),
+    });
+
+    if (!res.ok) return;
+
+    // Төлбөр төлөгдсөн үед AI зураг автоматаар үүсгэнэ
+    if (updates.paymentStatus === "paid") {
+      const orderRes = await fetch(`/api/orders/${orderId}`);
+      const order = await orderRes.json();
+
+      if (order.uploadedPhoto && order.prompt && !order.editedPhoto) {
+        const generateRes = await fetch("/api/generate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            imageUrl: order.uploadedPhoto,
+            prompt: order.prompt,
+          }),
+        });
+
+        const generatedData = await generateRes.json();
+
+        if (generateRes.ok && generatedData.url) {
+          await fetch(`/api/orders/${orderId}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              editedPhoto: generatedData.url,
+            }),
+          });
+        } else {
+          console.error(
+            "AI зураг үүсгэхэд алдаа:",
+            generatedData.error
+          );
+        }
       }
-    } catch {}
-  };
+    }
+
+    fetchData();
+  } catch (error) {
+    console.error("Order update error:", error);
+  }
+};
 
   const handleSettingChange = (key: string, value: string) => {
     setSettings((prev) => ({
