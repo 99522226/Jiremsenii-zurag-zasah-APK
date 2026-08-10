@@ -245,7 +245,7 @@ const handleInstall = async () => {
                     href="tel:95009809"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-xl font-medium hover:bg-rose-700 transition-colors"
                   >
-                    📞 95009809
+                    📞 85525385
                   </a>
                   <a
                     href="mailto:jaagiierdene96@gmail.com"
