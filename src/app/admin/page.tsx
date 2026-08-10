@@ -29,6 +29,7 @@ interface Order {
   paymentMethod: string;
   paymentStatus: string;
   uploadedPhoto: string | null;
+  prompt?: string;
   editedPhoto: string | null;
   notes: string | null;
   adminNotes: string | null;
