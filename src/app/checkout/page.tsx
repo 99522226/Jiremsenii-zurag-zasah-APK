@@ -19,6 +19,7 @@ export default function CheckoutPage() {
   const [orderId, setOrderId] = useState<number | null>(null);
   const [uploadedPhoto, setUploadedPhoto] = useState<string>("");
   const [prompt, setPrompt] = useState<string>("");
+  const [analyzingReference, setAnalyzingReference] = useState(false);
   const [settings, setSettings] = useState<Settings>({});
 
   const [form, setForm] = useState({
@@ -76,6 +77,43 @@ export default function CheckoutPage() {
     }
   };
 
+  const analyzeReferenceImage = async () => {
+  const referenceImage = items[0]?.image;
+
+  if (!referenceImage) {
+    alert("Каталогийн зураг олдсонгүй");
+    return;
+  }
+
+  setAnalyzingReference(true);
+
+  try {
+    const res = await fetch("/api/analyze-reference", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        imageUrl: referenceImage,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || "Prompt үүсгэхэд алдаа гарлаа");
+    }
+
+    setPrompt(data.prompt);
+
+    console.log("Generated prompt:", data.prompt);
+  } catch (error) {
+    console.error("Reference analysis error:", error);
+    alert("Каталогийн зургийг боловсруулахад алдаа гарлаа");
+  } finally {
+    setAnalyzingReference(false);
+  }
+};
 const handleSubmit = async () => {
     setSubmitting(true);
     try {
