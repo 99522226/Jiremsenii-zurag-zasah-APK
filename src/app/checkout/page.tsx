@@ -131,6 +131,7 @@ const handleSubmit = async () => {
 })),
           totalAmount: totalPrice(),
           uploadedPhoto: uploadedPhoto || null,
+          prompt: prompt || null,
         }),
       });
       if (res.ok) {
