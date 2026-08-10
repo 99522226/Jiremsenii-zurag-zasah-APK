@@ -998,6 +998,17 @@ export default function AdminPage() {
     />
   </div>
 )}
+                   {order.prompt && (
+  <div className="mt-4">
+    <label className="block text-sm font-medium text-gray-700 mb-2">
+      🤖 AI Prompt
+    </label>
+
+    <div className="w-full p-4 bg-purple-50 border border-purple-200 rounded-xl text-sm text-gray-700 whitespace-pre-wrap">
+      {order.prompt}
+    </div>
+  </div>
+)} 
                     <div className="flex items-start justify-between mb-4">
                       <div>
                         <h3 className="font-bold text-gray-900">Захиалга #{order.id}</h3>
