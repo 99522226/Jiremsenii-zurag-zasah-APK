@@ -51,7 +51,13 @@ export const orders = pgTable("orders", {
   customerName: varchar("customer_name", { length: 255 }).notNull(),
   customerEmail: varchar("customer_email", { length: 255 }).notNull(),
   customerPhone: varchar("customer_phone", { length: 50 }).notNull(),
-  items: jsonb("items").$type<Array<{ productId: number; name: string; price: number; quantity: number }>>().notNull(),
+  items: jsonb("items").$type<Array<{
+  productId: number;
+  name: string;
+  price: number;
+  quantity: number;
+  image: string;
+}>>().notNull(),
   totalAmount: integer("total_amount").notNull(),
   status: varchar("status", { length: 50 }).notNull().default("pending"),
   paymentMethod: varchar("payment_method", { length: 50 }).notNull().default("bank_transfer"),
