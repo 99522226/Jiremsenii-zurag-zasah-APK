@@ -353,6 +353,17 @@ const handleSubmit = async () => {
                 <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm animate-fade-in">
                   <h2 className="text-xl font-bold text-gray-900 mb-6">📸 Зураг оруулах</h2>
 
+                  <button
+  type="button"
+  onClick={analyzeReferenceImage}
+  disabled={analyzingReference}
+  className="mb-4 px-4 py-2 bg-purple-600 text-white rounded-xl"
+>
+  {analyzingReference
+    ? "🤖 Prompt үүсгэж байна..."
+    : "🤖 Каталогийн зурагт Prompt үүсгэх"}
+</button>
+
                   <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
                     <h3 className="font-bold text-amber-800 text-sm mb-2">⚠️ Зураг илгээхдээ анхаарах:</h3>
                     <ul className="space-y-1 text-amber-700 text-xs">
