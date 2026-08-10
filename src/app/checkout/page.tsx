@@ -85,11 +85,12 @@ const handleSubmit = async () => {
         body: JSON.stringify({
           ...form,
           items: items.map((i) => ({
-            productId: i.productId,
-            name: i.name,
-            price: i.price,
-            quantity: i.quantity,
-          })),
+  productId: i.productId,
+  name: i.name,
+  price: i.price,
+  quantity: i.quantity,
+  image: i.image,
+})),
           totalAmount: totalPrice(),
           uploadedPhoto: uploadedPhoto || null,
         }),
