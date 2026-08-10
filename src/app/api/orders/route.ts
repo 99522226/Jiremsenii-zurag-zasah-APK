@@ -6,7 +6,17 @@ import { eq, desc } from "drizzle-orm";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { customerName, customerEmail, customerPhone, items, totalAmount, paymentMethod, uploadedPhoto, notes } = body;
+   const {
+  customerName,
+  customerEmail,
+  customerPhone,
+  items,
+  totalAmount,
+  paymentMethod,
+  uploadedPhoto,
+  prompt,
+  notes,
+} = body;
 
     if (!customerName || !customerEmail || !customerPhone || !items?.length) {
       return NextResponse.json({ error: "Бүх талбарыг бөглөнө үү" }, { status: 400 });
@@ -22,6 +32,7 @@ export async function POST(req: NextRequest) {
         totalAmount,
         paymentMethod: paymentMethod || "bank_transfer",
         uploadedPhoto: uploadedPhoto || null,
+        prompt: prompt || null,
         notes: notes || null,
         status: "pending",
         paymentStatus: "pending",
