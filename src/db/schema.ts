@@ -63,6 +63,7 @@ export const orders = pgTable("orders", {
   paymentMethod: varchar("payment_method", { length: 50 }).notNull().default("bank_transfer"),
   paymentStatus: varchar("payment_status", { length: 50 }).notNull().default("pending"),
   uploadedPhoto: text("uploaded_photo"),
+  prompt: text("prompt"),
   editedPhoto: text("edited_photo"),
   notes: text("notes"),
   adminNotes: text("admin_notes"),
