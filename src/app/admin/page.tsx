@@ -119,6 +119,8 @@ export default function AdminPage() {
   prompt: "",
 });
 
+  const [generatingPrompt, setGeneratingPrompt] = useState(false);
+
   useEffect(() => {
     setMounted(true);
     loadFromStorage();
