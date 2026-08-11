@@ -291,6 +291,7 @@ export default function AdminPage() {
           category: "Энгийн",
           images: "",
           featured: false,
+           prompt: "",
         });
         fetchData();
       } else {
