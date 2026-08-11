@@ -108,15 +108,16 @@ export default function AdminPage() {
   // Product form states
   const [showProductForm, setShowProductForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  const [productForm, setProductForm] = useState({
-    name: "",
-    slug: "",
-    description: "",
-    price: "5000",
-    category: "Энгийн",
-    images: "",
-    featured: false,
-  });
+ const [productForm, setProductForm] = useState({
+  name: "",
+  slug: "",
+  description: "",
+  price: "5000",
+  category: "Энгийн",
+  images: "",
+  featured: false,
+  prompt: "",
+});
 
   useEffect(() => {
     setMounted(true);
@@ -209,6 +210,54 @@ export default function AdminPage() {
     logout();
     router.push("/");
   };
+
+  const handleGeneratePrompt = async () => {
+  if (!productForm.images.trim()) {
+    alert("Эхлээд бүтээгдэхүүний зураг upload хийнэ үү.");
+    return;
+  }
+
+  const imageUrl = productForm.images
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean)[0];
+
+  if (!imageUrl) {
+    alert("Бүтээгдэхүүний зураг олдсонгүй.");
+    return;
+  }
+
+  setGeneratingPrompt(true);
+
+  try {
+    const res = await fetch("/api/generate-prompt", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        imageUrl,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.error || "Prompt үүсгэхэд алдаа гарлаа");
+      return;
+    }
+
+    setProductForm((prev) => ({
+      ...prev,
+      prompt: data.prompt || "",
+    }));
+  } catch (error) {
+    console.error("Generate prompt error:", error);
+    alert("Prompt үүсгэхэд алдаа гарлаа");
+  } finally {
+    setGeneratingPrompt(false);
+  }
+};
 
   const handleProductSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
