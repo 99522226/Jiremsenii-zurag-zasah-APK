@@ -29,6 +29,7 @@ export const products = pgTable("products", {
   category: varchar("category", { length: 100 }).notNull(),
   images: jsonb("images").$type<string[]>().notNull().default([]),
   featured: boolean("featured").default(false),
+  prompt: text("prompt"),
   tags: jsonb("tags").$type<string[]>().notNull().default([]),
   rating: integer("rating").default(50),
   reviewCount: integer("review_count").default(0),
