@@ -1022,6 +1022,48 @@ export default function AdminPage() {
                           }}
                         />
 
+                       <div className="mt-4">
+  <button
+    type="button"
+    onClick={handleGeneratePrompt}
+    disabled={generatingPrompt || !productForm.images.trim()}
+    className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+  >
+    {generatingPrompt ? (
+      <span className="flex items-center justify-center gap-2">
+        <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+        🤖 Prompt үүсгэж байна...
+      </span>
+    ) : (
+      "🤖 AI Prompt автоматаар үүсгэх"
+    )}
+  </button>
+</div>
+
+{productForm.prompt && (
+  <div className="mt-4">
+    <label className="block text-sm font-medium text-gray-700 mb-2">
+      🤖 AI Prompt
+    </label>
+
+    <textarea
+      value={productForm.prompt}
+      onChange={(e) =>
+        setProductForm({
+          ...productForm,
+          prompt: e.target.value,
+        })
+      }
+      rows={8}
+      className="w-full px-4 py-3 border rounded-xl bg-purple-50 text-sm text-gray-700 focus:ring-2 focus:ring-purple-500"
+    />
+
+    <p className="text-xs text-gray-500 mt-2">
+      Энэ prompt-ийг зөвхөн админ ашиглана.
+    </p>
+  </div>
+)} 
+
                       </div>
                       <label className="flex items-center gap-2">
                         <input
