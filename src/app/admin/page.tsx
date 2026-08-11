@@ -922,7 +922,7 @@ export default function AdminPage() {
                                 category: product.category,
                                 images: product.images.join(", "),
                                 featured: product.featured,
-                                 prompt: product.prompt || "",
+                                prompt: product.prompt || "",
                               });
                               setShowProductForm(true);
                             }}
