@@ -14,6 +14,7 @@ interface Product {
   category: string;
   images: string[];
   featured: boolean;
+  prompt?: string;
   rating: number;
   reviewCount: number;
 }
