@@ -187,7 +187,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                     name: product.name,
                     price: product.price,
                     image: product.images[0] || "/images/product1.jpg",
-                    prompt: product.prompt || "",
+                   prompt: "",
                   })
                 }
                 className="w-full py-4 bg-rose-600 text-white rounded-2xl font-bold text-lg hover:bg-rose-700 transition-all hover:shadow-xl hover:shadow-rose-200 flex items-center justify-center gap-3"
