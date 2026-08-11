@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: "Bearer " + process.env.OPENAI_API_KEY,
       },
       body: JSON.stringify({
         model: "gpt-4.1-mini",
@@ -26,31 +26,7 @@ export async function POST(req: NextRequest) {
             content: [
               {
                 type: "input_text",
-                text: `
-Analyze this product/reference image carefully.
-
-Create a detailed image-generation prompt that can later be used
-to recreate this exact visual style and scene with a customer's photo.
-
-Describe:
-- person's pose and body position
-- clothing and accessories
-- background and environment
-- lighting
-- camera angle
-- composition
-- colors
-- hairstyle
-- important visual details
-- realistic photography style
-
-IMPORTANT:
-Do not describe the person's identity or facial identity.
-The future customer's face and identity must remain unchanged.
-
-Return ONLY the final English image-generation prompt.
-Do not add explanations or headings.
-                `,
+                text: "Analyze this product/reference image carefully. Create a detailed English image-generation prompt that describes the scene, person's pose, clothing, accessories, background, environment, lighting, camera angle, composition, colors, hairstyle, and important visual details. Keep the customer's future face and identity unchanged. Do not describe or identify the person's identity. Return ONLY the final English image-generation prompt.",
               },
               {
                 type: "input_image",
