@@ -160,6 +160,7 @@ export default function ProductsPage() {
                           name: product.name,
                           price: product.price,
                           image: product.images[0] || "/images/product1.jpg",
+                           prompt: product.prompt || "",
                         })
                       }
                       className="w-full mt-4 py-3 bg-rose-50 text-rose-600 rounded-2xl font-semibold hover:bg-rose-600 hover:text-white transition-all duration-200 flex items-center justify-center gap-2"
