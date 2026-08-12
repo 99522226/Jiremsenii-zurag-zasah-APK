@@ -1064,9 +1064,24 @@ export default function AdminPage() {
       className="w-full px-4 py-3 border rounded-xl bg-purple-50 text-sm text-gray-700 focus:ring-2 focus:ring-purple-500"
     />
 
-    <p className="text-xs text-gray-500 mt-2">
-      Энэ prompt-ийг зөвхөн админ ашиглана.
-    </p>
+   <div className="flex items-center justify-between mt-2">
+  <p className="text-xs text-gray-500">
+    Энэ prompt-ийг зөвхөн админ ашиглана.
+  </p>
+
+  <button
+    type="button"
+    onClick={() =>
+      setProductForm((prev) => ({
+        ...prev,
+        prompt: "",
+      }))
+    }
+    className="px-3 py-1.5 bg-red-50 text-red-600 rounded-lg text-xs font-medium hover:bg-red-100 transition-colors"
+  >
+    🗑️ Prompt устгах
+  </button>
+</div>
   </div>
 )} 
 
