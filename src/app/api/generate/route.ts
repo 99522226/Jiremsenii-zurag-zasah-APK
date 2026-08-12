@@ -27,14 +27,20 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const imageArrayBuffer = await imageRes.arrayBuffer();
-    const imageBlob = new Blob([imageArrayBuffer]);
+   const imageArrayBuffer = await imageRes.arrayBuffer();
+
+const contentType =
+  imageRes.headers.get("content-type") || "image/jpeg";
+
+const imageBlob = new Blob([imageArrayBuffer], {
+  type: contentType,
+});
 
     const openaiForm = new FormData();
 
     openaiForm.append("model", "gpt-image-1");
 
-    openaiForm.append("image", imageBlob, "input.png");
+    openaiForm.append("image", imageBlob, "input.jpg");
 
     openaiForm.append(
       "prompt",
