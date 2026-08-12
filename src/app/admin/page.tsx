@@ -1187,7 +1187,7 @@ export default function AdminPage() {
                           <option value="refunded">Буцаагдсан</option>
                         </select>
                       </div>
-                        <div className="mt-4">
+                       <div className="mt-4">
   <ImageUpload
     label="Зассан зураг"
     value={order.editedPhoto || ""}
@@ -1195,14 +1195,14 @@ export default function AdminPage() {
       handleUpdateOrder(order.id, { editedPhoto: url })
     }
   />
-    <div className="mt-4">
-  <ImageUpload
-    label="Зассан зураг"
-    value={order.editedPhoto || ""}
-    onChange={(url) =>
-      handleUpdateOrder(order.id, { editedPhoto: url })
-    }
-  />
+
+  {order.editedPhoto && (
+    <img
+      src={order.editedPhoto}
+      alt="Зассан зураг"
+      className="mt-4 w-full max-w-md rounded-xl border object-cover"
+    />
+  )}
 
   {order.status === "completed" && (
     <button
@@ -1220,7 +1220,9 @@ export default function AdminPage() {
             return;
           }
 
-          setOrders((prev) => prev.filter((o) => o.id !== order.id));
+          setOrders((prev) =>
+            prev.filter((o) => o.id !== order.id)
+          );
         } catch (error) {
           console.error(error);
           alert("Захиалга устгахад алдаа гарлаа");
@@ -1231,8 +1233,7 @@ export default function AdminPage() {
       🗑️ Устгах
     </button>
   )}
-</div>                      
-</div>
+</div> 
                     </div>
                   </div>
                 ))
