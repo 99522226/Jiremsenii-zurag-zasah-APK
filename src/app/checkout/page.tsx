@@ -155,7 +155,7 @@ const handleSubmit = async () => {
                 fetch(`/api/orders/${order.id}`, {
                   method: "PATCH",
                   headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ editedPhoto: data.url }),
+                 body: JSON.stringify({ generatedPhoto: data.url }),
                 });
               }
             })
