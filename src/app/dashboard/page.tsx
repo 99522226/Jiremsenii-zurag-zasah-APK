@@ -240,6 +240,10 @@ export default function DashboardPage() {
                 <div className="space-y-4">
                   {orders.map((order) => {
                     const status = STATUS_LABELS[order.status] || STATUS_LABELS.pending;
+                  const displayStatus =
+  order.editedPhoto && order.status === "processing"
+    ? STATUS_LABELS.completed
+    : status;
                     return (
                       <div
                         key={order.id}
