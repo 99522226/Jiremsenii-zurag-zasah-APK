@@ -325,12 +325,15 @@ export default function AdminPage() {
 
     if (!res.ok) return;
 
-    // Төлбөр төлөгдсөн үед AI зураг автоматаар үүсгэнэ
-    if (updates.paymentStatus === "paid") {
+    // Төлсөн эсвэл "Боловсруулж байна" үед AI зураг үүсгэнэ
+if (
+  updates.paymentStatus === "paid" ||
+  updates.status === "processing"
+) {
       const orderRes = await fetch(`/api/orders/${orderId}`);
       const order = await orderRes.json();
 
-      if (order.uploadedPhoto && order.prompt && !order.editedPhoto) {
+      if (order.uploadedPhoto && order.prompt) {
         const generateRes = await fetch("/api/generate", {
           method: "POST",
           headers: {
