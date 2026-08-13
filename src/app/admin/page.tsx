@@ -326,12 +326,11 @@ export default function AdminPage() {
 
     if (!res.ok) return;
 
-    // 💳 Төлсөн эсвэл 🔄 Боловсруулж байна үед AI зураг үүсгэнэ
+    // Төлсөн эсвэл боловсруулж байна үед AI зураг үүсгэнэ
     if (
       updates.paymentStatus === "paid" ||
       updates.status === "processing"
     ) {
-      // ⏳ Хүлээлгийн төлөвийг шууд асаана
       setGeneratingOrderId(orderId);
 
       try {
@@ -352,18 +351,17 @@ export default function AdminPage() {
 
           const generatedData = await generateRes.json();
 
-         if (generateRes.ok && generatedData.url) {
-  await fetch(`/api/orders/${orderId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      editedPhoto: generatedData.url,
-      status: "completed",
-    }),
-  });
-}
+          if (generateRes.ok && generatedData.url) {
+            await fetch(`/api/orders/${orderId}`, {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                editedPhoto: generatedData.url,
+                status: "completed",
+              }),
+            });
           } else {
             console.error(
               "AI зураг үүсгэхэд алдаа:",
@@ -372,7 +370,6 @@ export default function AdminPage() {
           }
         }
       } finally {
-        // ✅ AI дуусмагц хүлээлгийн тэмдэг алга болно
         setGeneratingOrderId(null);
       }
     }
