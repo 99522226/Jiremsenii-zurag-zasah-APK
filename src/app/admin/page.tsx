@@ -352,16 +352,18 @@ export default function AdminPage() {
 
           const generatedData = await generateRes.json();
 
-          if (generateRes.ok && generatedData.url) {
-            await fetch(`/api/orders/${orderId}`, {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                editedPhoto: generatedData.url,
-              }),
-            });
+         if (generateRes.ok && generatedData.url) {
+  await fetch(`/api/orders/${orderId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      editedPhoto: generatedData.url,
+      status: "completed",
+    }),
+  });
+}
           } else {
             console.error(
               "AI зураг үүсгэхэд алдаа:",
