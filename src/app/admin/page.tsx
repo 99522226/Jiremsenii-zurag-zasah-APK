@@ -1206,6 +1206,22 @@ if (
                         </select>
                       </div>
                        <div className="mt-4">
+
+                         {generatingOrderId === order.id && (
+  <div className="mb-3 p-4 bg-purple-50 border border-purple-200 rounded-xl">
+    <div className="flex items-center gap-3">
+      <div className="w-6 h-6 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+      <div>
+        <p className="font-semibold text-purple-700">
+          🤖 AI зураг үүсгэж байна...
+        </p>
+        <p className="text-xs text-purple-500 mt-1">
+          Түр хүлээнэ үү. Зураг боловсруулж байна.
+        </p>
+      </div>
+    </div>
+  </div>
+)}
   <ImageUpload
     label="Зассан зураг"
     value={order.editedPhoto || ""}
