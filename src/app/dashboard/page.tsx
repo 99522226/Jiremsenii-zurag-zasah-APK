@@ -258,9 +258,9 @@ export default function DashboardPage() {
                           <div>
                             <div className="flex items-center gap-3 mb-2">
                               <h3 className="font-bold text-gray-900">Захиалга #{order.id}</h3>
-                              <span className={`px-3 py-1 rounded-full text-xs font-bold ${status.color}`}>
-                                {status.emoji} {status.label}
-                              </span>
+                            <span className={`px-3 py-1 rounded-full text-xs font-bold ${displayStatus.color}`}>
+  {displayStatus.emoji} {displayStatus.label}
+</span> 
                             </div>
                             {isAdmin && (
                               <p className="text-sm text-gray-600">
