@@ -98,6 +98,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [savingSettings, setSavingSettings] = useState(false);
   const [settingsSaved, setSettingsSaved] = useState(false);
+  const [generatingOrderId, setGeneratingOrderId] = useState<number | null>(null);
 
   // Chat states
   const [chatSessions, setChatSessions] = useState<ChatSession[]>([]);
