@@ -326,53 +326,61 @@ export default function AdminPage() {
 
     if (!res.ok) return;
 
-    // Төлсөн эсвэл "Боловсруулж байна" үед AI зураг үүсгэнэ
-if (
-  updates.paymentStatus === "paid" ||
-  updates.status === "processing"
-) {
-      const orderRes = await fetch(`/api/orders/${orderId}`);
-      const order = await orderRes.json();
+    // 💳 Төлсөн эсвэл 🔄 Боловсруулж байна үед AI зураг үүсгэнэ
+    if (
+      updates.paymentStatus === "paid" ||
+      updates.status === "processing"
+    ) {
+      // ⏳ Хүлээлгийн төлөвийг шууд асаана
+      setGeneratingOrderId(orderId);
 
-      if (order.uploadedPhoto && order.prompt) {
-        const generateRes = await fetch("/api/generate", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            imageUrl: order.uploadedPhoto,
-            prompt: order.prompt,
-          }),
-        });
+      try {
+        const orderRes = await fetch(`/api/orders/${orderId}`);
+        const order = await orderRes.json();
 
-        const generatedData = await generateRes.json();
-
-        if (generateRes.ok && generatedData.url) {
-          await fetch(`/api/orders/${orderId}`, {
-            method: "PATCH",
+        if (order.uploadedPhoto && order.prompt) {
+          const generateRes = await fetch("/api/generate", {
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              editedPhoto: generatedData.url,
+              imageUrl: order.uploadedPhoto,
+              prompt: order.prompt,
             }),
           });
-        } else {
-          console.error(
-            "AI зураг үүсгэхэд алдаа:",
-            generatedData.error
-          );
+
+          const generatedData = await generateRes.json();
+
+          if (generateRes.ok && generatedData.url) {
+            await fetch(`/api/orders/${orderId}`, {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                editedPhoto: generatedData.url,
+              }),
+            });
+          } else {
+            console.error(
+              "AI зураг үүсгэхэд алдаа:",
+              generatedData.error
+            );
+          }
         }
+      } finally {
+        // ✅ AI дуусмагц хүлээлгийн тэмдэг алга болно
+        setGeneratingOrderId(null);
       }
     }
 
     fetchData();
   } catch (error) {
     console.error("Order update error:", error);
+    setGeneratingOrderId(null);
   }
 };
-
   const handleSettingChange = (key: string, value: string) => {
     setSettings((prev) => ({
       ...prev,
