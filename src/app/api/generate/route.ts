@@ -42,45 +42,83 @@ const imageBlob = new Blob([imageArrayBuffer], {
 
     openaiForm.append("image", imageBlob, "input.jpg");
 
-    openaiForm.append(
-      "prompt",
-      `${prompt}
+   openaiForm.append(
+  "prompt",
+  `${prompt}
 
-IMPORTANT IDENTITY PRESERVATION INSTRUCTIONS:
+=== CRITICAL IDENTITY PRESERVATION ===
 
-The person in the generated image must remain the same person as in the input photo.
+The uploaded image is the PRIMARY IDENTITY REFERENCE.
 
-Preserve the person's identity and facial appearance as accurately as possible.
+Preserve the exact identity of every person visible in the input image.
 
-Do NOT change or redesign the face.
+The generated person must be immediately recognizable as the SAME REAL PERSON from the uploaded photo.
 
-Preserve:
-- facial structure
-- face shape
-- eyes
-- eyebrows
-- nose
-- lips
-- mouth
-- jawline
-- cheek structure
-- skin tone
-- age
-- distinctive facial features
-- hairstyle whenever possible
+FACIAL IDENTITY — HIGHEST PRIORITY:
 
-Do NOT create a new face.
-Do NOT replace the person's face.
-Do NOT beautify or significantly alter the person's facial features.
-Do NOT make the person look like another person.
+- Preserve the exact facial structure and proportions.
+- Preserve the exact face shape.
+- Preserve both eyes, including their shape, size, spacing, and natural appearance.
+- Preserve eyebrows, including their natural shape and position.
+- Preserve the exact nose shape, width, bridge, and tip.
+- Preserve lips, mouth shape, and natural proportions.
+- Preserve cheekbones and cheek structure.
+- Preserve jawline and chin shape.
+- Preserve forehead and facial proportions.
+- Preserve natural skin tone and complexion.
+- Preserve distinctive facial characteristics, asymmetries, marks, and unique features.
+- Preserve the person's apparent age.
+- Preserve the person's natural physical characteristics.
 
-The input photo is the identity reference. Prioritize identity preservation above visual beautification.
+DO NOT:
 
-Only modify the elements requested by the user's product prompt, such as clothing, body appearance, background, environment, lighting, pose, or other requested elements.
+- create a new face
+- redesign the face
+- replace the face
+- reinterpret the person's identity
+- change facial proportions
+- make the face more symmetrical
+- beautify the face
+- make the person look younger or older
+- change eye shape
+- change nose shape
+- change lips
+- change jawline
+- change skin tone
+- apply a generic AI face
+- merge the face with another person's face
+- invent facial details that are not present in the reference
 
-The final image should clearly look like the same person from the original input photo.`
-    );
+IDENTITY PRIORITY:
 
+Identity preservation is more important than beautification, stylization, cinematic enhancement, or aesthetic perfection.
+
+If there is any conflict between the requested visual style and the person's real facial identity, ALWAYS prioritize preserving the original person's identity.
+
+The uploaded person's face must remain recognizable as the same person.
+
+=== EDITING INSTRUCTION ===
+
+Only change the visual elements specifically requested by the user's prompt, such as:
+
+clothing,
+hairstyle,
+body appearance,
+pose,
+environment,
+background,
+lighting,
+composition,
+props,
+decorations,
+or photographic style.
+
+Do not modify unrelated facial characteristics.
+
+The final result should look like a professionally photographed version of the SAME PERSON, not a different AI-generated person.
+
+=== END IDENTITY PRESERVATION ===`
+);
     openaiForm.append("size", "1024x1024");
 
     const openaiRes = await fetch(
