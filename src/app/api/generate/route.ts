@@ -29,95 +29,70 @@ export async function POST(req: NextRequest) {
 
    const imageArrayBuffer = await imageRes.arrayBuffer();
 
-const contentType =
-  imageRes.headers.get("content-type") || "image/jpeg";
+const contentType = imageRes.headers.get("content-type") || "image/jpeg";
+
+let mimeType = contentType.split(";")[0].toLowerCase();
+
+if (!["image/jpeg", "image/png", "image/webp"].includes(mimeType)) {
+  mimeType = "image/jpeg";
+}
+
+const extension =
+  mimeType === "image/png"
+    ? "png"
+    : mimeType === "image/webp"
+    ? "webp"
+    : "jpg";
 
 const imageBlob = new Blob([imageArrayBuffer], {
-  type: contentType,
+  type: mimeType,
 });
 
     const openaiForm = new FormData();
 
     openaiForm.append("model", "gpt-image-1");
 
-    openaiForm.append("image", imageBlob, "input.jpg");
+   openaiForm.append("image", imageBlob, `input.${extension}`);
 
-   openaiForm.append(
+  openaiForm.append(
   "prompt",
   `${prompt}
 
-=== CRITICAL IDENTITY PRESERVATION ===
+IDENTITY LOCK — EXTREMELY IMPORTANT:
 
-The uploaded image is the PRIMARY IDENTITY REFERENCE.
+Use the uploaded photo as the exact identity reference.
 
-Preserve the exact identity of every person visible in the input image.
+The person's face is NOT an element to redesign or regenerate.
 
-The generated person must be immediately recognizable as the SAME REAL PERSON from the uploaded photo.
+Keep the person's original face unchanged and recognizable.
 
-FACIAL IDENTITY — HIGHEST PRIORITY:
+Preserve the original:
+- eyes
+- eyebrows
+- nose
+- lips
+- mouth
+- cheeks
+- jaw
+- chin
+- face shape
+- facial proportions
+- skin tone
+- distinctive facial features
+- natural age
+- natural asymmetry
 
-- Preserve the exact facial structure and proportions.
-- Preserve the exact face shape.
-- Preserve both eyes, including their shape, size, spacing, and natural appearance.
-- Preserve eyebrows, including their natural shape and position.
-- Preserve the exact nose shape, width, bridge, and tip.
-- Preserve lips, mouth shape, and natural proportions.
-- Preserve cheekbones and cheek structure.
-- Preserve jawline and chin shape.
-- Preserve forehead and facial proportions.
-- Preserve natural skin tone and complexion.
-- Preserve distinctive facial characteristics, asymmetries, marks, and unique features.
-- Preserve the person's apparent age.
-- Preserve the person's natural physical characteristics.
+DO NOT beautify, reshape, reconstruct, replace, reinterpret, or regenerate the face.
 
-DO NOT:
+DO NOT create an AI version of the person.
 
-- create a new face
-- redesign the face
-- replace the face
-- reinterpret the person's identity
-- change facial proportions
-- make the face more symmetrical
-- beautify the face
-- make the person look younger or older
-- change eye shape
-- change nose shape
-- change lips
-- change jawline
-- change skin tone
-- apply a generic AI face
-- merge the face with another person's face
-- invent facial details that are not present in the reference
+DO NOT change the person's identity.
 
-IDENTITY PRIORITY:
+Only edit the elements requested in the main prompt.
 
-Identity preservation is more important than beautification, stylization, cinematic enhancement, or aesthetic perfection.
+If the requested scene requires a different outfit, pose, background, lighting, environment, or composition, change those elements while keeping the person's facial identity as close as possible to the uploaded reference.
 
-If there is any conflict between the requested visual style and the person's real facial identity, ALWAYS prioritize preserving the original person's identity.
-
-The uploaded person's face must remain recognizable as the same person.
-
-=== EDITING INSTRUCTION ===
-
-Only change the visual elements specifically requested by the user's prompt, such as:
-
-clothing,
-hairstyle,
-body appearance,
-pose,
-environment,
-background,
-lighting,
-composition,
-props,
-decorations,
-or photographic style.
-
-Do not modify unrelated facial characteristics.
-
-The final result should look like a professionally photographed version of the SAME PERSON, not a different AI-generated person.
-
-=== END IDENTITY PRESERVATION ===`
+The final image must clearly depict the same person from the uploaded photograph.`
 );
     openaiForm.append("size", "1024x1024");
 
