@@ -95,6 +95,7 @@ If the requested scene requires a different outfit, pose, background, lighting, 
 The final image must clearly depict the same person from the uploaded photograph.`
 );
     openaiForm.append("size", "1024x1024");
+    openaiForm.append("input_fidelity", "high");
 
     const openaiRes = await fetch(
       "https://api.openai.com/v1/images/edits",
