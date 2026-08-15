@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
+import sharp from "sharp";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -29,30 +30,35 @@ export async function POST(req: NextRequest) {
 
    const imageArrayBuffer = await imageRes.arrayBuffer();
 
-const contentType = imageRes.headers.get("content-type") || "image/jpeg";
+// Эх зургийн харьцааг хадгалж,
+// 1024x1024 хэмжээний дотор багтаана.
+// Хүнийг сунгаж эсвэл шахахгүй.
+const processedImageBuffer = await sharp(imageArrayBuffer)
+  .rotate()
+  .resize({
+    width: 1024,
+    height: 1024,
+    fit: "contain",
+    background: {
+      r: 255,
+      g: 255,
+      b: 255,
+      alpha: 1,
+    },
+  })
+  .jpeg({
+    quality: 95,
+  })
+  .toBuffer();
 
-let mimeType = contentType.split(";")[0].toLowerCase();
-
-if (!["image/jpeg", "image/png", "image/webp"].includes(mimeType)) {
-  mimeType = "image/jpeg";
-}
-
-const extension =
-  mimeType === "image/png"
-    ? "png"
-    : mimeType === "image/webp"
-    ? "webp"
-    : "jpg";
-
-const imageBlob = new Blob([imageArrayBuffer], {
-  type: mimeType,
+const imageBlob = new Blob([processedImageBuffer], {
+  type: "image/jpeg",
 });
-
     const openaiForm = new FormData();
 
     openaiForm.append("model", "gpt-image-1");
 
-   openaiForm.append("image", imageBlob, `input.${extension}`);
+   openaiForm.append("image", imageBlob, "input.jpg");
 
   openaiForm.append(
   "prompt",
