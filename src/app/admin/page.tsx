@@ -1162,7 +1162,7 @@ export default function AdminPage() {
     <img
       src={order.uploadedPhoto}
       alt="Хэрэглэгчийн оруулсан зураг"
-      className="w-full max-w-md rounded-xl border object-cover"
+    className="w-full max-w-md rounded-xl border object-contain"
     />
   </div>
 )}
@@ -1242,7 +1242,7 @@ export default function AdminPage() {
     <img
       src={order.editedPhoto}
       alt="Зассан зураг"
-      className="mt-4 w-full max-w-md rounded-xl border object-cover"
+      className="mt-4 w-full max-w-md rounded-xl border object-contain"
     />
   )}
 
