@@ -59,7 +59,7 @@ const imageBlob = new Blob(
 
     const openaiForm = new FormData();
 
-    openaiForm.append("model", "gpt-image-1");
+    openaiForm.append("model", "gpt-image-1.5");
 
    openaiForm.append("image", imageBlob, "input.jpg");
 
