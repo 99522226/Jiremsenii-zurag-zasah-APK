@@ -63,57 +63,52 @@ const imageBlob = new Blob(
 
    openaiForm.append("image", imageBlob, "input.jpg");
 
- openaiForm.append(
+openaiForm.append(
   "prompt",
   `${prompt}
 
-IDENTITY LOCK — EXTREMELY IMPORTANT:
+=== IDENTITY PRESERVATION — HIGHEST PRIORITY ===
 
-Use the uploaded photo as the exact identity reference.
+The uploaded photograph is the primary identity reference.
 
-The person's face is NOT an element to redesign or regenerate.
+Generate the requested scene using the SAME PERSON shown in the uploaded photograph.
 
-Keep the person's original face unchanged and recognizable.
+The person's face must remain as close as possible to the reference photograph.
 
-Preserve:
-- eyes
+Preserve the person's:
+- exact facial identity
+- natural face shape
+- facial proportions
+- eyes and eye spacing
 - eyebrows
 - nose
-- lips
-- mouth
+- lips and mouth
 - cheeks
-- jaw
+- jawline
 - chin
-- face shape
-- facial proportions
 - skin tone
-- distinctive facial features
 - natural age
+- distinctive facial characteristics
 - natural asymmetry
 
-DO NOT beautify, reshape, reconstruct, replace, reinterpret, or regenerate the face.
+Do NOT make the person look older.
+Do NOT make the person look younger.
+Do NOT change the person's facial proportions.
+Do NOT make the face wider or narrower.
+Do NOT make the face heavier or thinner.
+Do NOT beautify or stylize the face.
+Do NOT replace the face with a generic AI face.
+Do NOT invent a different person.
 
-DO NOT create an AI version of the person.
+The person's face is NOT part of the requested transformation.
 
-DO NOT change the person's identity.
+Only change the elements explicitly requested in the main prompt, such as clothing, hairstyle, pose, background, environment, lighting, decorations, or composition.
 
-ONLY edit the elements requested in the main prompt.
+Preserve the person's original body proportions, apparent height, and overall physical appearance unless the main prompt explicitly requests otherwise.
 
-If the requested scene requires a different outfit, pose, background, lighting, environment, or composition, change ONLY those requested elements.
+If the reference photo shows the full body, keep the entire person visible and preserve the original head-to-body proportions.
 
-DO NOT change the person's body proportions, body shape, height, weight, or apparent age unless the user's prompt explicitly requests it.
-
-DO NOT make the person shorter, wider, heavier, thinner, older, or younger.
-
-Preserve the person's original head-to-body proportions and overall physical appearance.
-
-Keep the entire person visible whenever the reference photo shows the full body.
-
-DO NOT crop the head, feet, hands, or other visible body parts unless the user's prompt explicitly requests cropping.
-
-The person's face and body proportions must remain consistent with the uploaded reference photo.
-
-The final image must clearly depict the SAME PERSON with the same facial identity and physical proportions.
+The final image must clearly look like the SAME PERSON from the uploaded photograph.
 `
 );
     openaiForm.append("size", "1024x1024");
