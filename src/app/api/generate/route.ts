@@ -51,12 +51,7 @@ const processedImageBuffer = await sharp(imageArrayBuffer)
   })
   .toBuffer();
 const imageBlob = new Blob(
-  [
-    processedImageBuffer.buffer.slice(
-      processedImageBuffer.byteOffset,
-      processedImageBuffer.byteOffset + processedImageBuffer.byteLength
-    ),
-  ],
+  [new Uint8Array(processedImageBuffer)],
   {
     type: "image/jpeg",
   }
