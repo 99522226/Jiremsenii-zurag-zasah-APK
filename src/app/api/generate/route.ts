@@ -63,7 +63,7 @@ const imageBlob = new Blob(
 
    openaiForm.append("image", imageBlob, "input.jpg");
 
-  openaiForm.append(
+ openaiForm.append(
   "prompt",
   `${prompt}
 
@@ -75,7 +75,7 @@ The person's face is NOT an element to redesign or regenerate.
 
 Keep the person's original face unchanged and recognizable.
 
-Preserve the original:
+Preserve:
 - eyes
 - eyebrows
 - nose
@@ -97,23 +97,24 @@ DO NOT create an AI version of the person.
 
 DO NOT change the person's identity.
 
-Only edit the elements requested in the main prompt.
+ONLY edit the elements requested in the main prompt.
 
-`If the requested scene requires a different outfit, pose, background, lighting, environment, or composition, change ONLY those requested elements.
+If the requested scene requires a different outfit, pose, background, lighting, environment, or composition, change ONLY those requested elements.
 
-Do NOT change the person's body proportions, body shape, height, weight, or apparent age unless the user's prompt explicitly requests it.
+DO NOT change the person's body proportions, body shape, height, weight, or apparent age unless the user's prompt explicitly requests it.
 
-Do NOT make the person shorter, wider, heavier, thinner, older, or younger.
+DO NOT make the person shorter, wider, heavier, thinner, older, or younger.
 
 Preserve the person's original head-to-body proportions and overall physical appearance.
 
 Keep the entire person visible whenever the reference photo shows the full body.
 
-Do not crop the head, feet, hands, or other visible body parts unless the user's prompt explicitly requests cropping.
+DO NOT crop the head, feet, hands, or other visible body parts unless the user's prompt explicitly requests cropping.
 
 The person's face and body proportions must remain consistent with the uploaded reference photo.
 
-The final image must clearly depict the same person with the same facial identity and physical proportions.
+The final image must clearly depict the SAME PERSON with the same facial identity and physical proportions.
+`
 );
     openaiForm.append("size", "1024x1024");
     openaiForm.append("input_fidelity", "high");
