@@ -1282,11 +1282,7 @@ export default function AdminPage() {
     Захиалгыг устгах
   </button>
 )}
-      className="mt-4 px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600"
-    >
-      🗑️ Устгах
-    </button>
-  )}
+     
 </div> 
                     </div>
                   </div>
