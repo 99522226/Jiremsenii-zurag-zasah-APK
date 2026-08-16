@@ -1254,30 +1254,34 @@ export default function AdminPage() {
   />
 )}
 
-  {order.status === "completed" && (
-    <button
-      type="button"
-      onClick={async () => {
-        if (!confirm("Энэ дууссан захиалгыг устгах уу?")) return;
+{order.status === "completed" && (
+  <button
+    type="button"
+    onClick={async () => {
+      if (!confirm("Энэ дууссан захиалгыг устгах уу?")) return;
 
-        try {
-          const res = await fetch(`/api/orders?id=${order.id}`, {
-            method: "DELETE",
-          });
+      try {
+        const res = await fetch(`/api/orders?id=${order.id}`, {
+          method: "DELETE",
+        });
 
-          if (!res.ok) {
-            alert("Захиалга устгахад алдаа гарлаа");
-            return;
-          }
-
-          setOrders((prev) =>
-            prev.filter((o) => o.id !== order.id)
-          );
-        } catch (error) {
-          console.error(error);
+        if (!res.ok) {
           alert("Захиалга устгахад алдаа гарлаа");
+          return;
         }
-      }}
+
+        setOrders((prev) =>
+          prev.filter((o) => o.id !== order.id)
+        );
+      } catch (error) {
+        console.error(error);
+        alert("Захиалга устгахад алдаа гарлаа");
+      }
+    }}
+  >
+    Захиалгыг устгах
+  </button>
+)}
       className="mt-4 px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600"
     >
       🗑️ Устгах
