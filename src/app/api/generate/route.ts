@@ -59,7 +59,7 @@ const imageBlob = new Blob(
 
     const openaiForm = new FormData();
 
-    openaiForm.append("model", "gpt-image-1.5");
+    openaiForm.append("model", "gpt-image-2");
 
    openaiForm.append("image", imageBlob, "input.jpg");
 
@@ -112,7 +112,7 @@ The final image must clearly look like the SAME PERSON from the uploaded photogr
 `
 );
     openaiForm.append("size", "1024x1024");
-    openaiForm.append("input_fidelity", "high");
+    
 
     const openaiRes = await fetch(
       "https://api.openai.com/v1/images/edits",
