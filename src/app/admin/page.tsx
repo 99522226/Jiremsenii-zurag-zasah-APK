@@ -1160,12 +1160,15 @@ export default function AdminPage() {
     </p>
 
     <img
-      src={order.uploadedPhoto}
-      alt="Хэрэглэгчийн оруулсан зураг"
-    className="w-full max-w-md h-auto rounded-xl border"
-    />
-  </div>
-)}
+  src={order.uploadedPhoto}
+  alt="Хэрэглэгчийн оруулсан зураг"
+  className="block w-full max-w-md h-auto rounded-xl border"
+  style={{
+    width: "100%",
+    height: "auto",
+    objectFit: "contain",
+  }}
+/>
                    {order.prompt && (
   <div className="mt-4">
     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1238,13 +1241,18 @@ export default function AdminPage() {
     }
   />
 
-  {order.editedPhoto && (
-    <img
-      src={order.editedPhoto}
-      alt="Зассан зураг"
-    className="w-full max-w-md h-auto rounded-xl border"
-    />
-  )}
+ {order.editedPhoto && (
+  <img
+    src={order.editedPhoto}
+    alt="Зассан зураг"
+    className="block w-full max-w-md h-auto rounded-xl border"
+    style={{
+      width: "100%",
+      height: "auto",
+      objectFit: "contain",
+    }}
+  />
+)}
 
   {order.status === "completed" && (
     <button
