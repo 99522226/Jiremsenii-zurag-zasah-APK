@@ -1160,16 +1160,19 @@ export default function AdminPage() {
     </p>
 
     <img
-  src={order.uploadedPhoto}
-  alt="Хэрэглэгчийн оруулсан зураг"
-  className="block w-full max-w-md h-auto rounded-xl border"
-  style={{
-    width: "100%",
-    height: "auto",
-    objectFit: "contain",
-  }}
-/>
-                   {order.prompt && (
+      src={order.uploadedPhoto}
+      alt="Хэрэглэгчийн оруулсан зураг"
+      className="block w-full max-w-md h-auto rounded-xl border"
+      style={{
+        width: "100%",
+        height: "auto",
+        objectFit: "contain",
+      }}
+    />
+  </div>
+)}
+
+{order.prompt && (
   <div className="mt-4">
     <label className="block text-sm font-medium text-gray-700 mb-2">
       🤖 AI Prompt
@@ -1179,7 +1182,7 @@ export default function AdminPage() {
       {order.prompt}
     </div>
   </div>
-)} 
+)}
                     <div className="flex items-start justify-between mb-4">
                       <div>
                         <h3 className="font-bold text-gray-900">Захиалга #{order.id}</h3>
