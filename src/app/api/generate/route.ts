@@ -50,18 +50,18 @@ const processedImageBuffer = await sharp(imageArrayBuffer)
     quality: 95,
   })
   .toBuffer();
-
 const imageBlob = new Blob(
   [
     processedImageBuffer.buffer.slice(
       processedImageBuffer.byteOffset,
       processedImageBuffer.byteOffset + processedImageBuffer.byteLength
-    ) as ArrayBuffer,
+    ),
   ],
   {
     type: "image/jpeg",
   }
 );
+
     const openaiForm = new FormData();
 
     openaiForm.append("model", "gpt-image-1");
