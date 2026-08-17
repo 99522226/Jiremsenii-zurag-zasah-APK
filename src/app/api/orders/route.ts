@@ -1,27 +1,55 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { orders } from "@/db/schema";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, gte } from "drizzle-orm";
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-   const {
-  customerName,
-  customerEmail,
-  customerPhone,
-  items,
-  totalAmount,
-  paymentMethod,
-  uploadedPhoto,
-  prompt,
-  notes,
-} = body;
+
+    const {
+      customerName,
+      customerEmail,
+      customerPhone,
+      items,
+      totalAmount,
+      paymentMethod,
+      uploadedPhoto,
+      prompt,
+      notes,
+    } = body;
 
     if (!customerName || !customerEmail || !customerPhone || !items?.length) {
-      return NextResponse.json({ error: "Бүх талбарыг бөглөнө үү" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Бүх талбарыг бөглөнө үү" },
+        { status: 400 }
+      );
     }
 
+    // Өнөөдрийн эхлэх цаг
+    const now = new Date();
+
+    const todayStart = new Date(now);
+    todayStart.setHours(0, 0, 0, 0);
+
+    // Өнөөдрийн захиалгуудыг авах
+    const todayOrders = await db
+      .select({
+        dailyOrderNumber: orders.dailyOrderNumber,
+      })
+      .from(orders)
+      .where(gte(orders.createdAt, todayStart));
+
+    // Өнөөдрийн хамгийн сүүлийн дугаар
+    const maxDailyOrderNumber = todayOrders.reduce(
+      (max, order) => Math.max(max, order.dailyOrderNumber || 0),
+      0
+    );
+
+    // Дараагийн дугаар
+    const dailyOrderNumber = maxDailyOrderNumber + 1;
+
+    // Захиалга үүсгэх
     const [order] = await db
       .insert(orders)
       .values({
@@ -34,6 +62,7 @@ export async function POST(req: NextRequest) {
         uploadedPhoto: uploadedPhoto || null,
         prompt: prompt || null,
         notes: notes || null,
+        dailyOrderNumber,
         status: "pending",
         paymentStatus: "pending",
       })
@@ -42,7 +71,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(order);
   } catch (error) {
     console.error("Order error:", error);
-    return NextResponse.json({ error: "Серверийн алдаа" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Серверийн алдаа" },
+      { status: 500 }
+    );
   }
 }
 
@@ -53,7 +85,11 @@ export async function GET(req: NextRequest) {
     const all = url.searchParams.get("all");
 
     if (all === "true") {
-      const result = await db.select().from(orders).orderBy(desc(orders.createdAt));
+      const result = await db
+        .select()
+        .from(orders)
+        .orderBy(desc(orders.createdAt));
+
       return NextResponse.json(result);
     }
 
@@ -63,13 +99,17 @@ export async function GET(req: NextRequest) {
         .from(orders)
         .where(eq(orders.customerEmail, email))
         .orderBy(desc(orders.createdAt));
+
       return NextResponse.json(result);
     }
 
     return NextResponse.json([]);
   } catch (error) {
     console.error("Orders error:", error);
-    return NextResponse.json({ error: "Серверийн алдаа" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Серверийн алдаа" },
+      { status: 500 }
+    );
   }
 }
 
