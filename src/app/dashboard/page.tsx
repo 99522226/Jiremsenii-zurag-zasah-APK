@@ -6,6 +6,7 @@ import { useAuthStore } from "@/store/auth";
 
 interface Order {
   id: number;
+  dailyOrderNumber: number;
   customerName: string;
   customerEmail: string;
   customerPhone: string;
@@ -257,7 +258,9 @@ export default function DashboardPage() {
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                           <div>
                             <div className="flex items-center gap-3 mb-2">
-                              <h3 className="font-bold text-gray-900">Захиалга #{order.id}</h3>
+                              <h3 className="font-bold text-gray-900">
+  Захиалга #{order.dailyOrderNumber}
+</h3>
                             <span className={`px-3 py-1 rounded-full text-xs font-bold ${displayStatus.color}`}>
   {displayStatus.emoji} {displayStatus.label}
 </span> 
