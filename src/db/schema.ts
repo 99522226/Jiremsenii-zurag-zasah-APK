@@ -69,6 +69,7 @@ generatedPhoto: text("generated_photo"),
 editedPhoto: text("edited_photo"),
   notes: text("notes"),
   adminNotes: text("admin_notes"),
+  dailyOrderNumber: integer("daily_order_number").notNull().default(0),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
