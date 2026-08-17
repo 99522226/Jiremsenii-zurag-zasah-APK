@@ -737,10 +737,10 @@ export default function AdminPage() {
 
       {settings.before_image?.value && (
         <img
-          src={settings.before_image.value}
-          alt="Өмнөх зураг"
-          className="mt-3 w-full h-48 object-cover rounded-xl"
-        />
+  src={settings.before_image.value}
+  alt="Өмнөх зураг"
+  className="mt-3 block w-full max-w-md h-auto rounded-xl border object-contain"
+/>
       )}
     </div>
 
@@ -760,10 +760,10 @@ export default function AdminPage() {
 
       {settings.after_image?.value && (
         <img
-          src={settings.after_image.value}
-          alt="Дараах зураг"
-          className="mt-3 w-full h-48 object-cover rounded-xl"
-        />
+  src={settings.after_image.value}
+  alt="Дараах зураг"
+  className="mt-3 block w-full max-w-md h-auto rounded-xl border object-contain"
+/>
       )}
     </div>
 
@@ -1158,17 +1158,12 @@ export default function AdminPage() {
     <p className="text-sm font-semibold text-gray-700 mb-2">
       Хэрэглэгчийн оруулсан зураг
     </p>
-
-    <img
-      src={order.uploadedPhoto}
-      alt="Хэрэглэгчийн оруулсан зураг"
-      className="block w-full max-w-md h-auto rounded-xl border"
-      style={{
-        width: "100%",
-        height: "auto",
-        objectFit: "contain",
-      }}
-    />
+<img
+  src={order.uploadedPhoto}
+  alt="Хэрэглэгчийн оруулсан зураг"
+  className="block w-full max-w-md h-auto rounded-xl border object-contain"
+/>
+   
   </div>
 )}
 
@@ -1245,16 +1240,11 @@ export default function AdminPage() {
   />
 
  {order.editedPhoto && (
-  <img
-    src={order.editedPhoto}
-    alt="Зассан зураг"
-    className="block w-full max-w-md h-auto rounded-xl border"
-    style={{
-      width: "100%",
-      height: "auto",
-      objectFit: "contain",
-    }}
-  />
+ <img
+  src={order.editedPhoto}
+  alt="Зассан зураг"
+  className="block w-full max-w-md h-auto rounded-xl border object-contain"
+/>
 )}
 
 {order.status === "completed" && (
