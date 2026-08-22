@@ -292,7 +292,7 @@ export default function DashboardPage() {
                               <img src={order.uploadedPhoto} alt="" className="w-16 h-16 rounded-lg object-cover" />
                             </div>
                           )}
-                          {order.editedPhoto && (
+                          {order.editedPhoto && (!isAdmin ? order.paymentStatus === "paid" : true) && (
                             <div>
                               <p className="text-xs text-gray-500 mb-1">✨ Засварласан зураг</p>
                               <img src={order.editedPhoto} alt="" className="w-16 h-16 rounded-lg object-cover" />
