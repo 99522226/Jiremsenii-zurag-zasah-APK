@@ -405,12 +405,19 @@ export default function DashboardPage() {
                     <img src={selectedOrder.uploadedPhoto} alt="" className="w-full h-auto max-h-96 object-contain rounded-xl bg-gray-100" />
                   </div>
                 )}
-                {selectedOrder.editedPhoto && (
-                  <div>
-                    <h3 className="font-semibold text-gray-700 text-sm mb-2">✨ Засварласан зураг</h3>
-                    <img src={selectedOrder.editedPhoto} alt="" className="w-full h-auto max-h-96 object-contain rounded-xl bg-gray-100" />
-                  </div>
-                )}
+                {selectedOrder.editedPhoto &&
+  (isAdmin || selectedOrder.paymentStatus === "paid") && (
+    <div>
+      <h3 className="font-semibold text-gray-700 text-sm mb-2">
+        ✨ Засварласан зураг
+      </h3>
+      <img
+        src={selectedOrder.editedPhoto}
+        alt=""
+        className="w-full h-auto max-h-96 object-contain rounded-xl bg-gray-100"
+      />
+    </div>
+  )}
               </div>
 
               {selectedOrder.notes && (
