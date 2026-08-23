@@ -18,6 +18,7 @@ export default function CheckoutPage() {
   const [orderComplete, setOrderComplete] = useState(false);
   const [orderId, setOrderId] = useState<number | null>(null);
   const [uploadedPhoto, setUploadedPhoto] = useState<string>("");
+  const [uploadedPhotos, setUploadedPhotos] = useState<string[]>([]);
   const [prompt, setPrompt] = useState<string>("");
   const [analyzingReference, setAnalyzingReference] = useState(false);
   const [settings, setSettings] = useState<Settings>({});
@@ -71,6 +72,7 @@ export default function CheckoutPage() {
       }
 
       setUploadedPhoto(data.url);
+setUploadedPhotos((prev) => [...prev, data.url]);
     } catch (err) {
       console.error(err);
       alert("Зураг upload хийхэд алдаа гарлаа");
@@ -375,39 +377,91 @@ const handleSubmit = async () => {
                     </ul>
                   </div>
 
-                  <div className="border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:border-rose-400 transition-colors">
-                    {uploadedPhoto ? (
-                      <div className="space-y-4">
-                        <img
-                          src={uploadedPhoto}
-                          alt="Uploaded"
-                          className="w-48 h-48 object-cover rounded-xl mx-auto"
-                        />
-                        <p className="text-green-600 font-medium">✅ Зураг амжилттай оруулсан</p>
-                        <button
-                          onClick={() => setUploadedPhoto("")}
-                          className="text-sm text-red-500 hover:underline"
-                        >
-                          Устгах
-                        </button>
-                      </div>
-                    ) : (
-                      <div>
-                        <span className="text-5xl block mb-4">📷</span>
-                        <p className="text-gray-600 mb-4">Зургаа энд оруулна уу</p>
-                        <label className="inline-flex items-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-xl font-medium hover:bg-rose-700 transition-colors cursor-pointer">
-                          <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleFileUpload}
-                            className="hidden"
-                          />
-                          Зураг сонгох
-                        </label>
-                      </div>
-                    )}
-                  </div>
+                <div className="border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:border-rose-400 transition-colors">
 
+  {uploadedPhotos.length > 0 ? (
+    <div className="space-y-5">
+
+      {/* Оруулсан зургууд */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        {uploadedPhotos.map((photo, index) => (
+          <div key={photo} className="relative">
+
+            <img
+              src={photo}
+              alt={`Uploaded ${index + 1}`}
+              className="w-full aspect-square object-cover rounded-xl"
+            />
+
+            <div className="absolute top-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded-lg">
+              {index + 1}-р хүн
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                setUploadedPhotos((prev) =>
+                  prev.filter((_, i) => i !== index)
+                );
+
+                if (index === 0) {
+                  setUploadedPhoto("");
+                }
+              }}
+              className="absolute top-2 right-2 w-7 h-7 bg-red-500 text-white rounded-full hover:bg-red-600"
+            >
+              ×
+            </button>
+
+          </div>
+        ))}
+      </div>
+
+      <p className="text-green-600 font-medium">
+        ✅ {uploadedPhotos.length} зураг амжилттай оруулсан
+      </p>
+
+      {/* Дахин зураг нэмэх */}
+      <label className="inline-flex items-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-xl font-medium hover:bg-rose-700 transition-colors cursor-pointer">
+
+        <span>➕</span>
+        Дахин зураг нэмэх
+
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileUpload}
+          className="hidden"
+        />
+
+      </label>
+
+    </div>
+  ) : (
+    <div>
+      <span className="text-5xl block mb-4">📷</span>
+
+      <p className="text-gray-600 mb-4">
+        Зургаа энд оруулна уу
+      </p>
+
+      <label className="inline-flex items-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-xl font-medium hover:bg-rose-700 transition-colors cursor-pointer">
+
+        <span>📷</span>
+        Зураг сонгох
+
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileUpload}
+          className="hidden"
+        />
+
+      </label>
+    </div>
+  )}
+
+</div> 
                   <div className="mt-6">
                     <label className="block text-sm font-medium text-gray-700 mb-2">Нэмэлт тэмдэглэл</label>
                     <textarea
