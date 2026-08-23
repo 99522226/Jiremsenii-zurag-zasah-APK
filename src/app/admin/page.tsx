@@ -326,12 +326,9 @@ export default function AdminPage() {
 
     if (!res.ok) return;
 
-    // Төлсөн эсвэл боловсруулж байна үед AI зураг үүсгэнэ
-    if (
-      updates.paymentStatus === "paid" ||
-      updates.status === "processing"
-    ) {
-      setGeneratingOrderId(orderId);
+    // Зөвхөн "Боловсруулж байна" болсон үед AI зураг үүсгэнэ
+if (updates.status === "processing") {
+  setGeneratingOrderId(orderId);
 
       try {
         const orderRes = await fetch(`/api/orders/${orderId}`);
