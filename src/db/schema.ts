@@ -64,6 +64,7 @@ export const orders = pgTable("orders", {
   paymentMethod: varchar("payment_method", { length: 50 }).notNull().default("bank_transfer"),
   paymentStatus: varchar("payment_status", { length: 50 }).notNull().default("pending"),
   uploadedPhoto: text("uploaded_photo"),
+  uploadedPhotos: jsonb("uploaded_photos").$type<string[]>().default([]).notNull(),
 prompt: text("prompt"),
 generatedPhoto: text("generated_photo"),
 editedPhoto: text("edited_photo"),
