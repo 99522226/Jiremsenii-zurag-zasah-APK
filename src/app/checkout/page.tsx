@@ -141,6 +141,7 @@ const handleSubmit = async () => {
         setOrderId(order.id);
         setOrderComplete(true);
         clearCart();
+      }  
 
     setSubmitting(false);
   };
