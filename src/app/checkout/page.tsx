@@ -383,7 +383,7 @@ const handleSubmit = async () => {
                     </ul>
                   </div>
 
-                <div className="border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:border-rose-400 transition-colors">
+                <div className="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center hover:border-rose-400 transition-colors">
 
   {uploadedPhotos.length > 0 ? (
     <div className="space-y-5">
@@ -391,30 +391,26 @@ const handleSubmit = async () => {
       {/* Оруулсан зургууд */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         {uploadedPhotos.map((photo, index) => (
-          <div key={photo} className="relative">
+          <div key={`${photo}-${index}`} className="relative group">
 
             <img
               src={photo}
-              alt={`Uploaded ${index + 1}`}
-              className="w-full aspect-square object-cover rounded-xl"
+              alt={`Оруулсан зураг ${index + 1}`}
+              className="w-full aspect-square object-cover rounded-xl border"
             />
 
             <div className="absolute top-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded-lg">
-              {index + 1}-р хүн
+              Зураг {index + 1}
             </div>
 
             <button
               type="button"
-              onClick={() => {
+              onClick={() =>
                 setUploadedPhotos((prev) =>
                   prev.filter((_, i) => i !== index)
-                );
-
-                if (index === 0) {
-                  setUploadedPhoto("");
-                }
-              }}
-              className="absolute top-2 right-2 w-7 h-7 bg-red-500 text-white rounded-full hover:bg-red-600"
+                )
+              }
+              className="absolute top-2 right-2 w-7 h-7 bg-red-500 text-white rounded-full opacity-90 hover:bg-red-600"
             >
               ×
             </button>
@@ -423,52 +419,57 @@ const handleSubmit = async () => {
         ))}
       </div>
 
-      <p className="text-green-600 font-medium">
-        ✅ {uploadedPhotos.length} зураг амжилттай оруулсан
-      </p>
-
       {/* Дахин зураг нэмэх */}
       <label className="inline-flex items-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-xl font-medium hover:bg-rose-700 transition-colors cursor-pointer">
 
-        <span>➕</span>
-        Дахин зураг нэмэх
+        📷 Дахин зураг нэмэх
 
         <input
           type="file"
           accept="image/*"
+          multiple
           onChange={handleFileUpload}
           className="hidden"
         />
 
       </label>
 
+      <p className="text-sm text-gray-500">
+        {uploadedPhotos.length} зураг сонгосон
+      </p>
+
     </div>
   ) : (
     <div>
+
       <span className="text-5xl block mb-4">📷</span>
 
       <p className="text-gray-600 mb-4">
-        Зургаа энд оруулна уу
+        2 болон түүнээс олон зураг оруулж болно
       </p>
 
       <label className="inline-flex items-center gap-2 px-6 py-3 bg-rose-600 text-white rounded-xl font-medium hover:bg-rose-700 transition-colors cursor-pointer">
 
-        <span>📷</span>
-        Зураг сонгох
+        📷 Зураг сонгох
 
         <input
-  type="file"
-  accept="image/*"
-  multiple
-  onChange={handleFileUpload}
-  className="hidden"
-/>
+          type="file"
+          accept="image/*"
+          multiple
+          onChange={handleFileUpload}
+          className="hidden"
+        />
 
       </label>
+
+      <p className="text-xs text-gray-400 mt-3">
+        Жишээ: Ээж + Аав + Хүүхэд
+      </p>
+
     </div>
   )}
 
-</div> 
+</div>
                   <div className="mt-6">
                     <label className="block text-sm font-medium text-gray-700 mb-2">Нэмэлт тэмдэглэл</label>
                     <textarea
