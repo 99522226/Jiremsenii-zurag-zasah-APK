@@ -334,7 +334,7 @@ if (updates.status === "processing") {
         const orderRes = await fetch(`/api/orders/${orderId}`);
         const order = await orderRes.json();
 
-        if (order.uploadedPhoto && order.prompt) {
+        if (order.uploadedPhoto && order.prompt && !order.editedPhoto) {
           const generateRes = await fetch("/api/generate", {
             method: "POST",
             headers: {
