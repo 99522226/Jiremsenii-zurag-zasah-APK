@@ -145,7 +145,6 @@ const handleSubmit = async () => {
 
 setSubmitting(false);
 };
-  };
   // Get settings values with defaults
   const phone = settings.phone?.value || "85525385";
   const email = settings.email?.value || "jaagiierdene96@gmail.com";
