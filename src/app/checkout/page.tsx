@@ -142,25 +142,7 @@ const handleSubmit = async () => {
         setOrderComplete(true);
         clearCart();
 
-        if (uploadedPhoto && prompt) {
-          fetch("/api/generate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              imageUrl: uploadedPhoto,
-              prompt: prompt,
-            }),
-          })
-            .then((r) => r.json())
-            .then((data) => {
-              if (data.url) {
-                fetch(`/api/orders/${order.id}`, {
-                  method: "PATCH",
-                  headers: { "Content-Type": "application/json" },
-                 body: JSON.stringify({ generatedPhoto: data.url }),
-                });
-              }
-            })
+        
             .catch((err) => console.error("AI generate error:", err));
         }
       }
