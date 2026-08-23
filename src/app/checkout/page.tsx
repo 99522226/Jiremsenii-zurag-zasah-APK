@@ -52,7 +52,7 @@ export default function CheckoutPage() {
   }, [user]);
 
  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const files = e.target.files;
     if (!file) return;
 
     try {
@@ -125,6 +125,7 @@ const handleSubmit = async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ...form,
+
         items: items.map((i) => ({
           productId: i.productId,
           name: i.name,
@@ -132,8 +133,15 @@ const handleSubmit = async () => {
           quantity: i.quantity,
           image: i.image,
         })),
+
         totalAmount: totalPrice(),
-        uploadedPhoto: uploadedPhoto || null,
+
+        // Эхний зураг
+        uploadedPhoto: uploadedPhotos[0] || uploadedPhoto || null,
+
+        // Бүх зураг
+        uploadedPhotos: uploadedPhotos,
+
         prompt: prompt || null,
       }),
     });
@@ -145,6 +153,9 @@ const handleSubmit = async () => {
       setOrderComplete(true);
       clearCart();
     } else {
+      const errorData = await res.json().catch(() => null);
+      console.error("Order create error:", errorData);
+
       alert("Захиалга үүсгэхэд алдаа гарлаа");
     }
   } catch (error) {
