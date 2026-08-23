@@ -15,6 +15,7 @@ export async function POST(req: NextRequest) {
       totalAmount,
       paymentMethod,
       uploadedPhoto,
+      uploadedPhotos,
       prompt,
       notes,
     } = body;
@@ -60,6 +61,7 @@ export async function POST(req: NextRequest) {
         totalAmount,
         paymentMethod: paymentMethod || "bank_transfer",
         uploadedPhoto: uploadedPhoto || null,
+        uploadedPhotos: uploadedPhotos || [],
         prompt: prompt || null,
         notes: notes || null,
         dailyOrderNumber,
