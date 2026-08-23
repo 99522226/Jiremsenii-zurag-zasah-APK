@@ -117,33 +117,42 @@ setUploadedPhotos((prev) => [...prev, data.url]);
   }
 };
 const handleSubmit = async () => {
-    setSubmitting(true);
-    try {
-      const res = await fetch("/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...form,
-          items: items.map((i) => ({
-  productId: i.productId,
-  name: i.name,
-  price: i.price,
-  quantity: i.quantity,
-  image: i.image,
-})),
-          totalAmount: totalPrice(),
-          uploadedPhoto: uploadedPhoto || null,
-          prompt: prompt || null,
-        }),
-      });
-      if (res.ok) {
-  const order = await res.json();
-  setOrderId(order.id);
-  setOrderComplete(true);
-  clearCart();
-}
+  setSubmitting(true);
 
-setSubmitting(false);
+  try {
+    const res = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...form,
+        items: items.map((i) => ({
+          productId: i.productId,
+          name: i.name,
+          price: i.price,
+          quantity: i.quantity,
+          image: i.image,
+        })),
+        totalAmount: totalPrice(),
+        uploadedPhoto: uploadedPhoto || null,
+        prompt: prompt || null,
+      }),
+    });
+
+    if (res.ok) {
+      const order = await res.json();
+
+      setOrderId(order.id);
+      setOrderComplete(true);
+      clearCart();
+    } else {
+      alert("Захиалга үүсгэхэд алдаа гарлаа");
+    }
+  } catch (error) {
+    console.error("Order submit error:", error);
+    alert("Захиалга илгээхэд алдаа гарлаа");
+  } finally {
+    setSubmitting(false);
+  }
 };
   // Get settings values with defaults
   const phone = settings.phone?.value || "85525385";
