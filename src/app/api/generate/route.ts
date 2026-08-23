@@ -67,48 +67,53 @@ openaiForm.append(
   "prompt",
   `${prompt}
 
-=== IDENTITY PRESERVATION — HIGHEST PRIORITY ===
+=== IDENTITY & PERSON PRESERVATION — HIGHEST PRIORITY ===
 
-The uploaded photograph is the primary identity reference.
+Use the uploaded photograph as the primary and authoritative reference for the person.
 
-Generate the requested scene using the SAME PERSON shown in the uploaded photograph.
+The final image must depict the SAME REAL PERSON shown in the uploaded photograph.
 
-The person's face must remain as close as possible to the reference photograph.
+Preserve the person's identity with maximum fidelity.
 
-Preserve the person's:
-- exact facial identity
-- natural face shape
-- facial proportions
-- eyes and eye spacing
-- eyebrows
-- nose
-- lips and mouth
-- cheeks
-- jawline
-- chin
-- skin tone
-- natural age
-- distinctive facial characteristics
-- natural asymmetry
+FACE PRESERVATION:
+- Keep the exact same facial identity.
+- Preserve the original face shape and proportions.
+- Preserve the eyes, eye shape, eye spacing, eyebrows, nose, lips, mouth, cheeks, jawline, chin, forehead, and overall facial structure.
+- Preserve the person's natural skin tone, apparent age, and distinctive facial characteristics.
+- Preserve natural facial asymmetry.
+- Keep the person's face recognizable as the same real person in the reference photograph.
 
-Do NOT make the person look older.
-Do NOT make the person look younger.
-Do NOT change the person's facial proportions.
-Do NOT make the face wider or narrower.
-Do NOT make the face heavier or thinner.
-Do NOT beautify or stylize the face.
-Do NOT replace the face with a generic AI face.
-Do NOT invent a different person.
+DO NOT:
+- Do not generate a new or different face.
+- Do not replace the person's face with a generic AI face.
+- Do not beautify or idealize the face.
+- Do not make the person younger or older.
+- Do not change facial proportions.
+- Do not make the face wider, narrower, longer, or shorter.
+- Do not change the person's ethnicity or distinctive appearance.
+- Do not alter facial identity because of clothing, hairstyle, pose, lighting, background, or environment.
 
-The person's face is NOT part of the requested transformation.
+PERSON PRESERVATION:
+- Preserve the person's original body proportions.
+- Preserve the person's natural physical appearance.
+- Preserve the original head-to-body relationship.
+- If the reference shows the full body, keep the person fully visible when appropriate.
+- Do not unnecessarily change body shape, height, or proportions.
 
-Only change the elements explicitly requested in the main prompt, such as clothing, hairstyle, pose, background, environment, lighting, decorations, or composition.
+EDITING RULE:
+Only modify the elements explicitly requested in the MAIN PROMPT above.
 
-Preserve the person's original body proportions, apparent height, and overall physical appearance unless the main prompt explicitly requests otherwise.
+Everything that is NOT explicitly requested to change should remain as close as possible to the uploaded photograph.
 
-If the reference photo shows the full body, keep the entire person visible and preserve the original head-to-body proportions.
+The requested transformation must be applied while maintaining the person's identity and natural appearance.
 
-The final image must clearly look like the SAME PERSON from the uploaded photograph.
+PRIORITY ORDER:
+1. Preserve the person's identity.
+2. Preserve facial features and proportions.
+3. Follow the requested transformation.
+4. Preserve natural photographic realism.
+
+The final result should look like a realistic photograph of the SAME PERSON after the requested transformation, not a different person inspired by the reference image.
 `
 );
     openaiForm.append("size", "1024x1024");
