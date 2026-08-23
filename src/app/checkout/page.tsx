@@ -142,11 +142,6 @@ const handleSubmit = async () => {
         setOrderComplete(true);
         clearCart();
 
-        
-            .catch((err) => console.error("AI generate error:", err));
-        }
-      }
-    } catch {}
     setSubmitting(false);
   };
   // Get settings values with defaults
