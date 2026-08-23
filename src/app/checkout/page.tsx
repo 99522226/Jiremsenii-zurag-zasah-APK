@@ -137,13 +137,14 @@ const handleSubmit = async () => {
         }),
       });
       if (res.ok) {
-        const order = await res.json();
-        setOrderId(order.id);
-        setOrderComplete(true);
-        clearCart();
-      }  
+  const order = await res.json();
+  setOrderId(order.id);
+  setOrderComplete(true);
+  clearCart();
+}
 
-    setSubmitting(false);
+setSubmitting(false);
+};
   };
   // Get settings values with defaults
   const phone = settings.phone?.value || "85525385";
