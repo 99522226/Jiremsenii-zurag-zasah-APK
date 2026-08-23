@@ -51,11 +51,14 @@ export default function CheckoutPage() {
     }
   }, [user]);
 
- const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!file) return;
+const handleFileUpload = async (
+  e: React.ChangeEvent<HTMLInputElement>
+) => {
+  const files = e.target.files;
+  if (!files || files.length === 0) return;
 
-    try {
+  try {
+    for (const file of Array.from(files)) {
       const formData = new FormData();
       formData.append("file", file);
 
@@ -67,17 +70,22 @@ export default function CheckoutPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert("Зураг upload хийхэд алдаа гарлаа");
-        return;
+        alert(`${file.name} зураг upload хийхэд алдаа гарлаа`);
+        continue;
       }
 
-      setUploadedPhoto(data.url);
-setUploadedPhotos((prev) => [...prev, data.url]);
-    } catch (err) {
-      console.error(err);
-      alert("Зураг upload хийхэд алдаа гарлаа");
+      setUploadedPhotos((prev) => [...prev, data.url]);
     }
-  };
+
+    // Дараагийн код одоо uploadedPhotos-оос ажиллана
+  } catch (err) {
+    console.error(err);
+    alert("Зураг upload хийхэд алдаа гарлаа");
+  } finally {
+    // Нэг input-оос дахин ижил зураг сонгох боломжтой болгоно
+    e.target.value = "";
+  }
+};
 
   const analyzeReferenceImage = async () => {
   const referenceImage = items[0]?.image;
@@ -449,11 +457,12 @@ const handleSubmit = async () => {
         Зураг сонгох
 
         <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileUpload}
-          className="hidden"
-        />
+  type="file"
+  accept="image/*"
+  multiple
+  onChange={handleFileUpload}
+  className="hidden"
+/>
 
       </label>
     </div>
